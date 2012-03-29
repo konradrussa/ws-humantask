@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ExpParser" default="makeExpParser">
+	<property file="build.properties"/>
+	
+	<property name="parserDir" value="src/main/java/wsht/runtime/expressions/sbql/qres/grammar"/>
+	
+	<target name="makeParsers">
+		<mkdir dir="${parserDir}"/>
+		<delete dir="${parserDir}" includes="*"/>
+		<antcall target="makeExpParser"/>
+	</target>
+	
+	
+	<target name="makeExpParser">
+			<antlr:ant-antlr3 xmlns:antlr="antlib:org/apache/tools/ant/antlr"
+    			target="SBQL/SBQL.g"
+    			outputdirectory="${parserDir}"
+    			libdirectory="lib"
+    			multithreaded="false">
+
+		</antlr:ant-antlr3>
+	
+	</target>
+
+</project>

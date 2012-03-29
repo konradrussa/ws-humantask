@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:registerLeanTaskDefinition xmlns:ns2="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803" xmlns="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803">
+    <ns2:taskDefinition actualOwnerRequired="yes" name="lenTaskName">
+        <interface responseOperation="wsdlResponseOperation" responsePortType="ns3:responseLocalPartServiceImpl" operation="wsdlOperation" portType="ns4:localPartServiceImpl" xmlns:ns4="http://wsdl.server" xmlns:ns3="http://response.wsdl.server"/>
+        <messageSchema>
+            <messageField type="ns3:localPart" name="field1" xmlns:ns3="namespaceUri">
+                <messageChoice value="vallue">
+                    <messageDisplay xml:lang="html"/>
+                </messageChoice>
+            </messageField>
+        </messageSchema>
+        <priority expressionLanguage="sbql" localPart="attributeValue"/>
+        <peopleAssignments localPart="attributeValue">
+            <documentation xml:lang="lang"/>
+            <localPart xmlns="" xmlns:ns3="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803">
+                <ns3:from logicalPeopleGroup="logicalPeopleGroup" expressionLanguage="sbql"/>
+            </localPart>
+            <localPart xmlns="" xmlns:ns3="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803">
+                <ns3:from logicalPeopleGroup="logicalPeopleGroup" expressionLanguage="sbql"/>
+                <ns3:parallel>
+                    <ns3:completionBehavior completionAction="manual">
+                        <ns3:defaultCompletion>
+                            <ns3:result/>
+                        </ns3:defaultCompletion>
+                    </ns3:completionBehavior>
+                </ns3:parallel>
+            </localPart>
+        </peopleAssignments>
+        <completionBehavior completionAction="manual">
+            <defaultCompletion>
+                <result/>
+            </defaultCompletion>
+        </completionBehavior>
+        <delegation potentialDelegatees="anybody">
+            <from logicalPeopleGroup="logicalPeopleGroup" expressionLanguage="sbql"/>
+        </delegation>
+        <presentationElements>
+            <presentationParameters expressionLanguage="sbql" localPart="attributeValue">
+                <documentation xml:lang="lang"/>
+                <ns3:presentationParameter type="lP" name="param1" xmlns="" xmlns:ns3="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803"/>
+            </presentationParameters>
+            <description contentType="text/html" xml:lang="html" localPart="attributeValue"/>
+        </presentationElements>
+        <outcome queryLanguage="sbqlQueryLanguage" part="partQuery" localPart="attributeValue"/>
+        <searchBy expressionLanguage="sbql"/>
+        <renderings>
+            <ns3:localPart type="lP" xmlns="" xmlns:ns3="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803"/>
+        </renderings>
+        <deadlines/>
+        <composition instantiationPattern="manual" type="sequential"/>
+    </ns2:taskDefinition>
+</ns2:registerLeanTaskDefinition>

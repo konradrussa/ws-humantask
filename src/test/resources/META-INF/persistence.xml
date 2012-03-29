@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="ds" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>wsht.infrastructure.domain.entity.base.Expression</class>
+		<class>wsht.infrastructure.domain.entity.base.ExtensibleElementsBase</class>
+		<class>wsht.infrastructure.domain.entity.base.ExtensibleMixedContentElementsBase</class>
+		<class>wsht.infrastructure.domain.entity.base.GenericHumanRoleAssignmentBase</class>
+		<class>wsht.infrastructure.domain.entity.base.AttributeBase</class>
+
+		<class>wsht.infrastructure.domain.entity.Aggregate</class>
+		<class>wsht.infrastructure.domain.entity.BooleanExpr</class>
+		<class>wsht.infrastructure.domain.entity.Completion</class>
+		<class>wsht.infrastructure.domain.entity.CompletionBehavior</class>
+		<class>wsht.infrastructure.domain.entity.Copy</class>
+
+		<class>wsht.infrastructure.domain.entity.Deadline</class>
+		<class>wsht.infrastructure.domain.entity.DeadlineExpr</class>
+		<class>wsht.infrastructure.domain.entity.Deadlines</class>
+		<class>wsht.infrastructure.domain.entity.DefaultCompletion</class>
+		<class>wsht.infrastructure.domain.entity.Delegation</class>
+		<class>wsht.infrastructure.domain.entity.Description</class>
+		<class>wsht.infrastructure.domain.entity.Documentation</class>
+		<class>wsht.infrastructure.domain.entity.DurationExpr</class>
+		<class>wsht.infrastructure.domain.entity.Escalation</class>
+		<class>wsht.infrastructure.domain.entity.From</class>
+		<class>wsht.infrastructure.domain.entity.LeanTask</class>
+		<class>wsht.infrastructure.domain.entity.LocalNotification</class>
+		<class>wsht.infrastructure.domain.entity.MessageChoice</class>
+		<class>wsht.infrastructure.domain.entity.MessageDisplay</class>
+		<class>wsht.infrastructure.domain.entity.MessageField</class>
+		<class>wsht.infrastructure.domain.entity.MessageSchema</class>
+		<class>wsht.infrastructure.domain.entity.Notification</class>
+		<class>wsht.infrastructure.domain.entity.NotificationInterface</class>
+		<class>wsht.infrastructure.domain.entity.Parallel</class>
+		<class>wsht.infrastructure.domain.entity.Parameter</class>
+		<class>wsht.infrastructure.domain.entity.PeopleAssignments</class>
+		<class>wsht.infrastructure.domain.entity.PotentialOwnerAssignment</class>
+		<class>wsht.infrastructure.domain.entity.GenericHumanRoleAssignment</class>
+		<class>wsht.infrastructure.domain.entity.PresentationElements</class>
+		<class>wsht.infrastructure.domain.entity.PresentationParameter</class>
+		<class>wsht.infrastructure.domain.entity.PresentationParameters</class>
+		<class>wsht.infrastructure.domain.entity.PriorityExpr</class>
+		<class>wsht.infrastructure.domain.entity.Query</class>
+		<class>wsht.infrastructure.domain.entity.Reassignment</class>
+		<class>wsht.infrastructure.domain.entity.Rendering</class>
+		<class>wsht.infrastructure.domain.entity.Renderings</class>
+		<class>wsht.infrastructure.domain.entity.Result</class>
+		<class>wsht.infrastructure.domain.entity.Sequence</class>
+		<class>wsht.infrastructure.domain.entity.Text</class>
+		<class>wsht.infrastructure.domain.entity.ToPart</class>
+		<class>wsht.infrastructure.domain.entity.ToParts</class>
+		<class>wsht.infrastructure.domain.entity.TaskInfo</class>
+		<class>wsht.infrastructure.domain.entity.OrganizationalEntity</class>
+
+
+		<class>wsht.infrastructure.domain.entity.PeopleAssignments</class>
+		<class>wsht.infrastructure.domain.entity.PotentialOwnerAssignment</class>
+		<class>wsht.infrastructure.domain.entity.Parallel</class>
+		<class>wsht.infrastructure.domain.entity.Sequence</class>
+		<class>wsht.infrastructure.domain.entity.From</class>
+		<class>wsht.infrastructure.domain.entity.Fault</class>
+		
+		<class>wsht.infrastructure.domain.entity.Notifications</class>
+		<class>wsht.infrastructure.domain.entity.Composition</class>
+		<class>wsht.infrastructure.domain.entity.Extension</class>
+		<class>wsht.infrastructure.domain.entity.Extensions</class>
+		<class>wsht.infrastructure.domain.entity.HumanInteractions</class>
+		<class>wsht.infrastructure.domain.entity.Import</class>
+		<class>wsht.infrastructure.domain.entity.LocalTask</class>
+		<class>wsht.infrastructure.domain.entity.LogicalPeopleGroup</class>
+		<class>wsht.infrastructure.domain.entity.LogicalPeopleGroups</class>
+		<class>wsht.infrastructure.domain.entity.Subtask</class>
+		<class>wsht.infrastructure.domain.entity.Task</class>
+		<class>wsht.infrastructure.domain.entity.TaskInterface</class>
+		<class>wsht.infrastructure.domain.entity.Tasks</class>
+		<class>wsht.infrastructure.domain.entity.TaskDetails</class>
+		<class>wsht.infrastructure.domain.entity.TaskInfoEvent</class>
+		
+		<class>wsht.infrastructure.domain.entity.Nominate</class>
+		
+		<class>wsht.infrastructure.domain.entity.UserSession</class>
+
+	</persistence-unit>
+</persistence>
