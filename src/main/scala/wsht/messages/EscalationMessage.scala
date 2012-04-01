@@ -2,7 +2,7 @@ package wsht.messages
 
 import wsht.infrastructure.domain.entity.Escalation
 
-case class EscalationMessage(val message:Escalation,var compotated:Boolean) extends WSHTMessage with TraitMessageListener {
+case class EscalationMessage(val message:Escalation,var computated:Boolean) extends WSHTMessage with TraitMessageListener {
 
   def this(message:Escalation) = this(message,false)
   

@@ -2,7 +2,7 @@ package wsht.messages
 
 import wsht.infrastructure.domain.entity._
 
-case class DelegateMessage(val message:Delegation,var compotated:Boolean) extends WSHTMessage with TraitMessageListener {
+case class DelegateMessage(val message:Delegation,var computated:Boolean) extends WSHTMessage with TraitMessageListener {
 
   def this(message:Delegation) = this(message,false)
   

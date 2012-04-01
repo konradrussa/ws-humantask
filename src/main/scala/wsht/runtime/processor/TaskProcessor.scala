@@ -5,30 +5,17 @@ import akka.actor.Props
 import wsht.errorkernel.actors._
 import wsht.messages._
 import akka.actor._
+import akka.event.LoggingReceive
 
 
-case class TaskProcessor(var instanceName: String, var task:TaskInfo) extends FaultHandler {
+case class TaskProcessor(var instanceName: String, var task:TaskInfo) extends Actor { 
+   
+  var taskActor:ActorRef = context.actorOf(Props[TaskActor], instanceName)
   
-  import Worker._
-  
-  trait Processor
-  case object TaskCreate extends Processor
-  case object InvokeEscalation extends Processor
-  case object InvokeDeadline extends Processor
-  case object InvokeNotification extends Processor
-  case object InvokeLocalNotification extends Processor
-  
-  var supervisorActor:ActorRef = system.actorOf(Props[FaultTolerantSupervisor])
-  var taskActor:ActorRef = system.actorOf(Props[TaskActor])
-  
-  
+  def receive = LoggingReceive  {
+    case _ => TaskEngine.process(task)
+  }
 
-}
-
-object Worker {
-  case object Start
-  case object Do
-  case object End
 }
 
 object TaskProcessor extends TraitProcessor {
@@ -45,13 +32,23 @@ object TaskProcessor extends TraitProcessor {
     println("TaskProcessor.processMessage=" + m)
     
     m match {
-      case DeadlineMessage(deadline, computated) if deadline.getUntil() != null => println(deadline)
-      case EscalationMessage(escalation, computated) if escalation.getCondition() != null => println(escalation)
-      case DelegateMessage(delegate, computated) => println(delegate)
-      case NominateMessage(nominate, computated) => println(nominate)
+      case DeadlineMessage(deadline, computated) if deadline.getUntil() != null =>  {
+        println(deadline)
+      }
+      case EscalationMessage(escalation, computated) if escalation.getCondition() != null =>  {
+        println(escalation)
+      }
+      case DelegateMessage(delegate, computated) =>  {
+        println(delegate)
+      }
+      case NominateMessage(nominate, computated) => {
+        println(nominate)
+      }
+      
       case _ => println("nieznany komunikat")
     }
     
   }
+  
 }
 

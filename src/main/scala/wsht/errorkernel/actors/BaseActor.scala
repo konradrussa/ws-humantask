@@ -17,14 +17,5 @@ abstract class BaseActor extends Actor {
 
   val log = Logging(context.system, this)
 
-  override val supervisorStrategy = OneForOneStrategy(maxNrOfRetries = 3, withinTimeRange = 1 minute) {
-    case _: ArithmeticException => Resume
-    case _: NullPointerException => Restart
-    case _: IllegalArgumentException => Stop
-    case _: Exception => Escalate
-  }
-
-  def process: Unit
-
   def sendMessage(m: WSHTMessage)
 }
