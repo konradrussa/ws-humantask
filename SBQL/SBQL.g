@@ -170,7 +170,7 @@ maxExpression returns [Expression expr]
 
 avgExpression returns [Expression expr] 
       : e1 = maxExpression {$expr = $e1.expr;}
-      | AVG LEFT_BRACKET maxExpression RIGHT_BRACKET {$expr = new MaxOperator($maxExpression.expr);}
+      | AVG LEFT_BRACKET maxExpression RIGHT_BRACKET {$expr = new AvgOperator($maxExpression.expr);}
       ;  
       
 countExpression returns [Expression expr] 
