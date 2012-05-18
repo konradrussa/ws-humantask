@@ -51,7 +51,7 @@ evaluator
       ;
 
 terminalExpression returns [Expression expr]
-      : LEFT_BRACKET e1 = intersectExpression RIGHT_BRACKET {$expr = $e1.expr;}
+      : LEFT_BRACKET e1 = waitUntilExpression RIGHT_BRACKET {$expr = $e1.expr;}
       | INTEGERLITERAL {$expr = new IntegerTerminal(Integer.parseInt($INTEGERLITERAL.text));}
       | DOUBLELITERAL {$expr = new DoubleTerminal(Double.parseDouble($DOUBLELITERAL.text));}
       | BOOLEANLITERAL {$expr = new BooleanTerminal(Boolean.parseBoolean($BOOLEANLITERAL.text));}
