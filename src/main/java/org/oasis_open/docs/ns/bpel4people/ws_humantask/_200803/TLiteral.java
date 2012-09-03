@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
+
+import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TOrganizationalEntity;
 import org.w3c.dom.Element;
 
 
@@ -37,7 +39,7 @@ import org.w3c.dom.Element;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tLiteral", propOrder = {
-    "content"
+		"organizationalEntity","content"
 })
 public class TLiteral {
 
@@ -47,6 +49,8 @@ public class TLiteral {
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
+    protected TOrganizationalEntity organizationalEntity;
+    
     /**
      * Gets the value of the content property.
      * 
@@ -96,4 +100,18 @@ public class TLiteral {
         return otherAttributes;
     }
 
+	public TOrganizationalEntity getOrganizationalEntity() {
+		return organizationalEntity;
+	}
+
+	public void setOrganizationalEntity(TOrganizationalEntity organizationalEntity) {
+		this.organizationalEntity = organizationalEntity;
+	}
+
+
+    
+    
+    
+    
+    
 }

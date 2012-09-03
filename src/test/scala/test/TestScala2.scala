@@ -13,8 +13,6 @@ object TestScala2 {
     val task = new TaskInfo("identifier")
     
     val message1= new Deadline()
-    message1.set_for(new DurationExpr("12:30"))
-    message1.setUntil(new DeadlineExpr("P7"))
     val deadline = new DeadlineMessage(message1)
     TaskProcessor.processMessage(deadline,task)
 
@@ -25,7 +23,6 @@ object TestScala2 {
     
     
     var message3 = new Escalation()
-    message3.setCondition(new BooleanExpr("expressionLanguage"))
     var escalation = new EscalationMessage(message3)
     TaskProcessor.processMessage(escalation,task)
     

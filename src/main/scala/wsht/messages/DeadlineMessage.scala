@@ -3,7 +3,7 @@ package wsht.messages
 import wsht.infrastructure.domain.entity._
 import wsht.runtime.processor.TaskProcessor
 
-case class DeadlineMessage (val message:Deadline,var computated:Boolean) extends WSHTMessage with TraitMessageListener {
+case class DeadlineMessage (val message:Deadline,var computated:Boolean) extends WSHTMessage {
 
   def this(message:Deadline) = this(message,false)
   

@@ -21,5 +21,11 @@ public class ResourceUtil {
 		}
 		return out.toString();
 	}
+	
+	public static InputStream loadInputStream(String fileName) {
+		InputStream inputStream = ResourceUtil.class.getClassLoader()
+				.getResourceAsStream(fileName);
+		return inputStream;
+	}
 
 }

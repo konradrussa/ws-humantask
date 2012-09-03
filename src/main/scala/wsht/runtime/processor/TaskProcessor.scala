@@ -8,12 +8,14 @@ import akka.actor._
 import akka.event.LoggingReceive
 
 
+
+
 case class TaskProcessor(var instanceName: String, var task:TaskInfo) extends Actor { 
    
   var taskActor:ActorRef = context.actorOf(Props[TaskActor], instanceName)
   
   def receive = LoggingReceive  {
-    case _ => TaskEngine.process(task)
+    case _ => sender ! task
   }
 
 }
@@ -27,6 +29,8 @@ object TaskProcessor extends TraitProcessor {
     processMessage(m)
     TaskProcessor(task).taskActor ! m
   }
+
+	
   
   def processMessage(m:WSHTMessage) = {
     println("TaskProcessor.processMessage=" + m)

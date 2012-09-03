@@ -23,12 +23,12 @@ public class ParserMain {
 	public static void main(String[] args) throws  IOException {
 		
 		SBAStore store = new SBAStore();
-		store.loadObject();
+		//error store.loadObject();
 		store.printDataStore();
 		ENVS.getInstance().setStore(store);
 		
 		List<Long> rootOIDs = ((ComplexObject)store.objectMap.get(0L)).childOIDs;
-		ENVS.getInstance().init(rootOIDs.toArray(new Long[0]));
+		ENVS.getInstance().init(true,rootOIDs.toArray(new Long[0]));
 		
 		query22();
 		

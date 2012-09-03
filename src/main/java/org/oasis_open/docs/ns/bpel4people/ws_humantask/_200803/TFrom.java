@@ -48,6 +48,10 @@ public class TFrom
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlSchemaType(name = "NCName")
     protected String logicalPeopleGroup;
+    
+    protected TArgument argument;
+    
+    protected TLiteral literal;
 
     /**
      * Gets the value of the expressionLanguage property.
@@ -96,5 +100,23 @@ public class TFrom
     public void setLogicalPeopleGroup(String value) {
         this.logicalPeopleGroup = value;
     }
+
+	public TArgument getArgument() {
+		return argument;
+	}
+
+	public void setArgument(TArgument argument) {
+		this.argument = argument;
+	}
+
+	public TLiteral getLiteral() {
+		return literal;
+	}
+
+	public void setLiteral(TLiteral literal) {
+		this.literal = literal;
+	}
+    
+    
 
 }

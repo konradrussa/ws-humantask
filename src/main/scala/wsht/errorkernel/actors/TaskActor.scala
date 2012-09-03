@@ -9,10 +9,10 @@ case class TaskActor extends BaseActor {
 
   
   def receive = LoggingReceive {
-    case event:NominateMessage => process(event)
-  	case event:DelegateMessage => process(event)
-  	case event:DeadlineMessage => process(event)
-  	case event:EscalationMessage => process(event)
+    case event:NominateMessage if event.computated => process(event)
+  	case event:DelegateMessage if event.computated => process(event)
+  	case event:DeadlineMessage if event.computated => process(event)
+  	case event:EscalationMessage if event.computated => process(event)
   }
   
   def process(m:WSHTMessage): Unit = {

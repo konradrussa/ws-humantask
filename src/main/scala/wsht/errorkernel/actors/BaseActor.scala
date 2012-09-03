@@ -14,7 +14,6 @@ import com.typesafe.config.ConfigFactory
 
 abstract class BaseActor extends Actor {
 
-
   val log = Logging(context.system, this)
 
   def sendMessage(m: WSHTMessage)

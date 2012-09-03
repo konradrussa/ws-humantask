@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dozer.sourceforge.net
+          http://dozer.sourceforge.net/schema/beanmapping.xsd">
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TPeopleAssignments</class-a>
+		<class-b>wsht.infrastructure.domain.entity.PeopleAssignments</class-b>
+		<field custom-converter="wsht.marshalling.converter.JAXBElementConverter">
+			<a>genericHumanRole</a>
+			<b>genericHumanRole</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TOrganizationalEntity</class-a>
+		<class-b>wsht.infrastructure.domain.entity.OrganizationalEntity</class-b>
+		<field custom-converter="wsht.marshalling.converter.JAXBElementConverter">
+			<a>group</a>
+			<b>groupOrg</b>
+		</field>
+		<field custom-converter="wsht.marshalling.converter.JAXBElementConverter">
+			<a>user</a>
+			<b>userOrg</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TNotification
+		</class-a>
+		<class-b>wsht.infrastructure.domain.entity.Notification</class-b>
+		<field>
+			<a>interface</a>
+			<b>_interface</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TTask
+		</class-a>
+		<class-b>wsht.infrastructure.domain.entity.Task</class-b>
+		<field>
+			<a>interface</a>
+			<b>_interface</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TDeadline
+		</class-a>
+		<class-b>wsht.infrastructure.domain.entity.Deadline</class-b>
+		<field>
+			<a>for</a>
+			<b>_for</b>
+		</field>
+	</mapping>
+	
+	<mapping>
+		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.THumanInteractions
+		</class-a>
+		<class-b>wsht.infrastructure.domain.entity.HumanInteractions</class-b>
+		<field>
+			<a>import</a>
+			<b>_import</b>
+		</field>
+	</mapping>
+
+</mappings>

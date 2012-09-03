@@ -1,7 +1,7 @@
 package wsht.messages
 import wsht.infrastructure.domain.entity.Nominate
 
-case class NominateMessage (val message:Nominate,var computated:Boolean) extends WSHTMessage with TraitMessageListener {
+case class NominateMessage (val message:Nominate,var computated:Boolean) extends WSHTMessage {
 
   def this(message:Nominate) = this(message,false)
   

@@ -83,6 +83,16 @@
 		
 		<class>wsht.infrastructure.domain.entity.Nominate</class>
 		
+		<class>wsht.infrastructure.domain.entity.Argument</class>
+		<class>wsht.infrastructure.domain.entity.Literal</class>
+		
+		<class>wsht.infrastructure.domain.entity.Comment</class>
+		<class>wsht.infrastructure.domain.entity.Comments</class>
+		<class>wsht.infrastructure.domain.entity.AttachmentInfo</class>
+		<class>wsht.infrastructure.domain.entity.AttachmentInfos</class>
+		<class>wsht.infrastructure.domain.entity.Attachment</class>
+		<class>wsht.infrastructure.domain.entity.Attachments</class>
+		
 		<class>wsht.infrastructure.domain.entity.UserSession</class>
 	</persistence-unit>
 </persistence>

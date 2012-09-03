@@ -16,6 +16,8 @@ import akka.actor.ReceiveTimeout
 import wsht.messages.WSHTMessage
 import akka.event.LoggingReceive
 import wsht.exception.{NonRecoverableError, TaskExpiredFault}
+import akka.actor.Props
+import akka.actor.ActorRef
 
 class FaultTolerantSupervisor extends BaseActor with TraitUncaughtExceptionHandler {
   
@@ -53,7 +55,9 @@ class FaultTolerantSupervisor extends BaseActor with TraitUncaughtExceptionHandl
   }
   
   def receive = LoggingReceive {
-    case "test" => {
+    case Register(actor) => {
+    	//self.
+    	def taskActor = context.actorOf(Props[TaskActor])
     	println("wywolanie test FaultTolerantSupervisor")
     	log.info("received test")
     }
@@ -64,3 +68,5 @@ class FaultTolerantSupervisor extends BaseActor with TraitUncaughtExceptionHandl
   }
 
 }
+
+case class Register(val actor:ActorRef)

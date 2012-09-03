@@ -53,7 +53,7 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-		
+
 	</repositories>
 
 	<pluginRepositories>
@@ -130,12 +130,27 @@
 				<version>2.14</version>
 				<executions>
 					<execution>
+						<id>compile</id>
 						<goals>
 							<goal>compile</goal>
+						</goals>
+						<phase>compile</phase>
+					</execution>
+					<execution>
+						<id>test-compile</id>
+						<goals>
 							<goal>testCompile</goal>
+						</goals>
+						<phase>test-compile</phase>
+					</execution>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>
+
 				<configuration>
 					<scalaVersion>${scala.version}</scalaVersion>
 					<args>
@@ -149,8 +164,8 @@
 				<version>2.3.1</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
@@ -159,8 +174,8 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
 					<!-- warSourceExcludes> WEB-INF/lib/*.jar </warSourceExcludes -->
 					<archive>
@@ -224,6 +239,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor-tests</artifactId>
+			<version>${akka.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-kernel</artifactId>
+			<version>${akka.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
@@ -243,11 +270,22 @@
 			<scope>system</scope>
 			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/xws-security-3.0.jar</systemPath>
 		</dependency>
+		
+		<dependency>
+			<groupId>com</groupId>
+			<artifactId>db4o</artifactId>
+			<version>8.0.249.16098-all-java5</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/db4o-8.0.249.16098-all-java5.jar</systemPath>
+		</dependency>
+		
+		
+		
 
 		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
-			<version>2.9.1</version>
+			<version>2.10.0</version>
 		</dependency>
 
 
@@ -285,6 +323,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
 
@@ -342,7 +386,7 @@
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>8.3-603.jdbc4</version>
+			<version>9.1-902.jdbc4</version>
 		</dependency>
 
 		<dependency>
@@ -376,6 +420,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr</artifactId>
 			<version>3.2</version>
@@ -387,17 +437,35 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		
+
 		<dependency>
-      		<groupId>net.sf.dozer</groupId>
-      		<artifactId>dozer</artifactId>
-      		<version>5.3.2</version>
-      	</dependency>
-      	
-      	<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.3.2</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jdom</groupId>
 			<artifactId>jdom</artifactId>
 			<version>1.1.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-analysis</artifactId>
+			<version>3.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-commons</artifactId>
+			<version>3.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-util</artifactId>
+			<version>3.3</version>
 		</dependency>
 
 

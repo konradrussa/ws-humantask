@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+	<ClaimApprovalRequest>
+		<amount>9000</amount>
+		<prio>2</prio>
+	</ClaimApprovalRequest>
+</root>

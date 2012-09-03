@@ -3,7 +3,7 @@ import wsht.messages.WSHTMessage
 import wsht.messages.TraitMessageListener
 import wsht.infrastructure.domain.entity.TaskInfo
 
-trait TraitProcessor extends TraitMessageListener {
+trait TraitProcessor {
 
    protected def apply(instanceName: String, task:TaskInfo): TaskProcessor
    
