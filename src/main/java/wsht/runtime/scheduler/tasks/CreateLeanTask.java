@@ -13,8 +13,6 @@ import wsht.infrastructure.service.IRepositoryService;
 import wsht.runtime.enums.TaskStatesEnum;
 import wsht.runtime.scheduler.enums.TaskParameterTypeEnum;
 
-import wsht.runtime.processor.TaskEngine;
-
 public class CreateLeanTask extends AbstractTask {
 
 	private static final Logger log = LoggerFactory.getLogger(CreateLeanTask.class);
@@ -26,7 +24,7 @@ public class CreateLeanTask extends AbstractTask {
 		ApplicationContext context = taskContext.getApplicationContext();
 		LeanTask task = (LeanTask) taskContext.getParameters().get(TaskParameterTypeEnum.CREATE_LEAN_TASK);
 		TaskInfo taskInfo = new TaskInfo();
-		taskInfo.setLeanTask(true);
+		taskInfo.setIsLeanTask(true);
 		taskInfo.setCreated(new Date());
 		taskInfo.setState(TaskStatesEnum.CREATED);
 		taskInfo.setTask(task);

@@ -14,8 +14,6 @@ import wsht.infrastructure.service.IRepositoryService;
 import wsht.runtime.enums.TaskStatesEnum;
 import wsht.runtime.scheduler.enums.TaskParameterTypeEnum;
 
-import wsht.runtime.processor.TaskEngine;
-
 public class DeadlineTask extends AbstractTask {
 
 	private static final Logger log = LoggerFactory

@@ -4,14 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
-import wsht.runtime.processor.TaskEngine;
-
 import wsht.infrastructure.domain.entity.Deadline;
 import wsht.infrastructure.domain.entity.Escalation;
 import wsht.infrastructure.service.IRepositoryService;
 import wsht.runtime.scheduler.enums.TaskParameterTypeEnum;
-
-import wsht.runtime.processor.TaskEngine;
 
 public class EscalationTask extends AbstractTask {
 

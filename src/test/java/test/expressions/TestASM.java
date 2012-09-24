@@ -85,7 +85,6 @@ public class TestASM {
 		public Location(Integer locationId) {
 			this.locationId = locationId;
 		}
-		//public Cust cust2 = new Cust("locidCust1", "locJohn", "locRambo", this); stack overflow
 		public Integer locationId;
 	}
 

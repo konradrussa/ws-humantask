@@ -42,6 +42,7 @@ public class TestSpringAndDB {
 			hi = service.createHumanInteractions(hi);
 			
 			Task storedTask = hi.getTasks().getTask().get(0);
+			Assert.assertNotNull(storedTask);
 			
 			TaskInfo taskInfo = new TaskInfo();
 			taskInfo.setTaskIdentifier(UUID.randomUUID().toString().substring(0, 10));
@@ -49,12 +50,12 @@ public class TestSpringAndDB {
 			taskInfo.setTask(storedTask);
 			taskInfo.setState(TaskStatesEnum.CREATED);
 			taskInfo = service.createTaskInfo(taskInfo);
+			Assert.assertNotNull(taskInfo);
 			
+			//IValuable valuable = (IValuable) context.getBean("expContextService");
 			
-			IValuable valuable = (IValuable) context.getBean("expContextService");
-			
-			AbstractQueryResult res = valuable.eval("getInput(\"ClaimApprovalRequest\").amount", false);
-			System.out.println(res);
+			//AbstractQueryResult res = valuable.eval("getInput(\"ClaimApprovalRequest\").amount", false);
+			//System.out.println(res);
 			
 		} catch (WSHTException e) {
 			e.printStackTrace();

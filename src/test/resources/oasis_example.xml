@@ -10,7 +10,7 @@
   xmlns:cl="http://www.example.com/claims/"
   xmlns:tns="http://www.example.com"
   targetNamespace="http://www.example.com"
-  xsi:schemaLocation="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803 ../../xml/R">
+  xsi:schemaLocation="http://docs.oasis-open.org/ns/bpel4people/ws-humantask/200803 ../../xml/ws-humantask.xsd">
 
   <htd:documentation>
     Example for WS-HumanTask 1.1 - WS-HumanTask Task Definition

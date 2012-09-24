@@ -15,14 +15,19 @@ import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.Ille
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.IllegalStateFault;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.LeanTaskOperations;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.ListLeanTaskDefinitionsResponse.LeanTaskDefinitions;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import wsht.infrastructure.domain.entity.LeanTask;
 import wsht.infrastructure.service.IRepositoryService;
+import wsht.infrastructure.web.SessionInfo;
 import wsht.marshalling.IBeanMapper;
 
 @WebService(endpointInterface="org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.LeanTaskOperations")
 @Addressing
 public class LeanTaskOperationsImpl implements LeanTaskOperations {
+	
+	@Autowired
+	private SessionInfo sessionInfo;
 	
 	@Resource
 	private IRepositoryService repositoryService;

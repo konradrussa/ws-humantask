@@ -17,7 +17,7 @@ public class TestParser {
 
 	@Test
 	public void testParser() {
-		ANTLRStringStream antlrStringStream = new ANTLRStringStream("5 / 3.50");
+		ANTLRStringStream antlrStringStream = new ANTLRStringStream("7 / 3.50");
     	SBQLLexer lex = new SBQLLexer(antlrStringStream);
         TokenStream tokens = new CommonTokenStream(lex);
         SBQLParser parser = new SBQLParser(tokens);

@@ -18,7 +18,6 @@
 		<config>src/test/resources/spring/spring-cxf.xml</config>
 		<config>src/test/resources/spring/spring-datasource.xml</config>
 		<config>src/test/resources/spring/spring-quartz.xml</config>
-		<config>src/test/resources/spring/spring-web.xml</config>
 	</configs>
 	<configSets>
 	</configSets>

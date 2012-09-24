@@ -17,5 +17,16 @@
 		<aop:scoped-proxy/>
 	</bean>
 
+	<bean id="serviceFactory" class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
+		scope="prototype">
+		<property name="serviceConfigurations">
+			<list>
+				<bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration" />
+				<bean
+					class="org.apache.cxf.aegis.databinding.XFireCompatibilityServiceConfiguration" />
+				<bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration" />
+			</list>
+		</property>
+	</bean>
 
 </beans>

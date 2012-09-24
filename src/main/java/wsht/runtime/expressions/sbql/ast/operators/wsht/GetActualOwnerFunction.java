@@ -32,7 +32,6 @@ public class GetActualOwnerFunction extends WSHTOperator implements IOperator {
 	@Override
 	public void eval() {
 		
-		//TODO: implement GetActualOwnerFunction eval
 		AbstractQueryResult res = QRES.getInstance().pop(false);
 		if(res instanceof StringResult) {
 			StringResult term = (StringResult) res;

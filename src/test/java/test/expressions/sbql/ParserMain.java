@@ -8,6 +8,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
+import test.infrastructure.ClaimApprovalRequest;
 import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.QRES;
 import wsht.runtime.expressions.sbql.qres.grammar.SBQLLexer;
@@ -23,7 +24,7 @@ public class ParserMain {
 	public static void main(String[] args) throws  IOException {
 		
 		SBAStore store = new SBAStore();
-		//error store.loadObject();
+		store.loadContainer(new ClaimApprovalRequest());
 		store.printDataStore();
 		ENVS.getInstance().setStore(store);
 		

@@ -87,7 +87,6 @@ public class ASMVisitorWithSBAProcessing extends SBAProcessing implements Annota
 			if(signature != null) {
 				if(ReflectionUtils.checkIfListSignature(signature)) {
 					for(Object o : (List<?>)childObject) {
-						System.out.println("LIST : " + o.getClass().getName());
 						if(ReflectionUtils.checkIfComplexClass(o.getClass())) {
 							objects.push(o);
 							process();
@@ -110,6 +109,7 @@ public class ASMVisitorWithSBAProcessing extends SBAProcessing implements Annota
 					for(Entry<?, ?> o : ((Map<?, ?>)childObject).entrySet()) {
 						if(ReflectionUtils.checkIfComplexClass(o.getValue().getClass())) {
 							objects.push(o.getValue());
+							objectFieldName = o.getKey().toString();
 							process();
 						} else {
 							processSimpleObject(name, o.getValue());
@@ -129,13 +129,13 @@ public class ASMVisitorWithSBAProcessing extends SBAProcessing implements Annota
 				}
 			}
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getLocalizedMessage(), e);
 		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getLocalizedMessage(), e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getLocalizedMessage(), e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			LOGGER.error(e.getLocalizedMessage(), e);
 		} 
 		
 		return this;

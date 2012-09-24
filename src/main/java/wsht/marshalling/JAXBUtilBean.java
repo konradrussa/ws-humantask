@@ -35,22 +35,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JAXBUtilBean implements IJAXBUtilBean {
 
     private final Validator validator;
 
-    private final String SCHEMA_PATH = "oasis/ws-humantask.xsd";
+    private final String SCHEMA_PATH_WSHT = "oasis/ws-humantask.xsd";
+    private final String SCHEMA_PATH_XML = "oasis/xml.xsd";
 
     public JAXBUtilBean() {
     	String schemaFactoryProperty = "javax.xml.validation.SchemaFactory:" + XMLConstants.W3C_XML_SCHEMA_NS_URI;
     	System.setProperty(schemaFactoryProperty,"org.apache.xerces.jaxp.validation.XMLSchemaFactory");
     	SchemaFactory factory = XMLSchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     	//factory.setResourceResolver(new ResourceResolver());
-        InputStream schemaIS = JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH);
-        Source schemaSrc = new StreamSource(schemaIS);
+        List<Source> schemas = new ArrayList<Source>();
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_XML)));
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WSHT)));
+
+
         try {
-            Schema schema = factory.newSchema(schemaSrc);
+            Schema schema = factory.newSchema(schemas.toArray(new Source[schemas.size()]));
             validator = schema.newValidator();
         } catch (SAXException e) {
             throw new RuntimeException(e);

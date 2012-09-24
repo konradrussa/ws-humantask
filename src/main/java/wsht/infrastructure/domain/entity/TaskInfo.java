@@ -75,9 +75,9 @@ public class TaskInfo implements Serializable {
 	@OneToOne(orphanRemoval=true,cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Fault fault;
 	
-	private boolean leanTask;
+	private boolean isLeanTask;
 	
-	private boolean subtask;
+	private boolean isSubtask;
 	
 	@OneToOne(orphanRemoval=true,cascade=CascadeType.ALL)
 	private Attachments attachments;
@@ -157,21 +157,21 @@ public class TaskInfo implements Serializable {
 	public void setFault(Fault fault) {
 		this.fault = fault;
 	}
-	
-	public boolean getLeanTask() {
-		return leanTask;
+
+	public boolean getIsLeanTask() {
+		return isLeanTask;
 	}
 
-	public void setLeanTask(boolean leanTask) {
-		this.leanTask = leanTask;
-	}
-	
-	public boolean getSubtask() {
-		return subtask;
+	public void setIsLeanTask(boolean isLeanTask) {
+		this.isLeanTask = isLeanTask;
 	}
 
-	public void setSubtask(boolean subtask) {
-		this.subtask = subtask;
+	public boolean getIsSubtask() {
+		return isSubtask;
+	}
+
+	public void setIsSubtask(boolean isSubtask) {
+		this.isSubtask = isSubtask;
 	}
 
 	public Attachments getAttachments() {

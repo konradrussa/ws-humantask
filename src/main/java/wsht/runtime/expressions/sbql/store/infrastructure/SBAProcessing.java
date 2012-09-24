@@ -99,7 +99,6 @@ public abstract class SBAProcessing {
 		
 		if(objectFieldName != null) { 
 			name = objectFieldName;
-			System.out.println("s for name: " + name);
 			return filterOutParentByNameForSimple(name,complexObject);
 		} else if(complexObject.name.equals(currentObject.getClass().getSimpleName()))
 			return complexObject;

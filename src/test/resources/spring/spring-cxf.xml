@@ -12,42 +12,19 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
-	default-lazy-init="true" >
+	default-lazy-init="true">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-*.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-		<!-- Interceptor umieszczajacy obiekt JSESSIONID w klientach WebServices, 
-		dzięki temu korzystają ze wspólnej sesji -->
+	<import resource="spring-web.xml" />
 
-	<bean id="cxf" class="org.apache.cxf.bus.extension.ExtensionManagerBus">
-		<property name="inInterceptors">
-			<list>
-				<bean
-					class="wsht.infrastructure.web.interceptor.JSessionIdInterceptor">
-					<property name="services">
-						<list>
-							<!-- ref bean="authService" /-->
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
+	<bean id="commonInterface-Authentication"
+		class="wsht.infrastructure.webservice.commons.AuthenticatorWebServiceImpl">
+		<property name="sessionInfo" ref="sessionInfo"></property>
 	</bean>
-	
-	<bean id="serviceFactory" class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
-		scope="prototype">
-		<!-- property name="dataBinding" ref="aegisBean" / -->
-		<property name="serviceConfigurations">
-			<list>
-				<bean class="org.apache.cxf.jaxws.support.JaxWsServiceConfiguration" />
-				<bean
-					class="org.apache.cxf.aegis.databinding.XFireCompatibilityServiceConfiguration" />
-				<bean class="org.apache.cxf.service.factory.DefaultServiceConfiguration" />
-			</list>
-		</property>
-	</bean>
+
 
 	<bean id="progmamingInterface-TaskOperations"
 		class="wsht.infrastructure.webservice.programminginterface.TaskOperationsImpl">
@@ -68,41 +45,51 @@
 	<bean id="leanTask-LeanTaskOperations"
 		class="wsht.infrastructure.webservice.leantask.LeanTaskOperationsImpl">
 	</bean>
-
-
-	<jaxws:endpoint implementor="#progmamingInterface-TaskOperations"
-		address="${endpoint.common.part}/taskOperations" bus="cxf">
+	
+	
+	<jaxws:endpoint implementor="#commonInterface-Authentication"
+		address="${endpoint.common.part}${endpoint.authentication}">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
 	
-	<jaxws:endpoint implementor="#ïnteroperableProtocol-ClientParticipantPortType"
-		address="${endpoint.common.part}/clientParticipant" bus="cxf">
+		<jaxws:endpoint implementor="#progmamingInterface-TaskOperations"
+		address="${endpoint.common.part}${endpoint.taskoperations}">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
 	
-	<jaxws:endpoint implementor="#ïnteroperableProtocol-HumanTaskParticipantPortType"
-		address="${endpoint.common.part}/humanTaskParticipant" bus="cxf">
-		<jaxws:serviceFactory>
-			<ref bean="serviceFactory" />
-		</jaxws:serviceFactory>
-	</jaxws:endpoint>
-	
-	<jaxws:endpoint implementor="#leanTask-LeanTaskCallbackOperations"
-		address="${endpoint.common.part}/leanTaskCallbackOperations" bus="cxf">
-		<jaxws:serviceFactory>
-			<ref bean="serviceFactory" />
-		</jaxws:serviceFactory>
-	</jaxws:endpoint>
 	
 	<jaxws:endpoint implementor="#leanTask-LeanTaskOperations"
-		address="${endpoint.common.part}/leanTaskOperations" bus="cxf">
+		address="${endpoint.common.part}${endpoint.leantaskoperations}">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
+
+	<jaxws:endpoint implementor="#leanTask-LeanTaskCallbackOperations"
+		address="${endpoint.common.part}${endpoint.leantaskcallbackoperations}">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+
+
+	<jaxws:endpoint implementor="#ïnteroperableProtocol-ClientParticipantPortType"
+		address="${endpoint.common.part}${endpoint.clientparticipant}">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+
+	<jaxws:endpoint implementor="#ïnteroperableProtocol-HumanTaskParticipantPortType"
+		address="${endpoint.common.part}${endpoint.humantaskparticipant}">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+
 
 </beans>

@@ -16,7 +16,7 @@
   
   <!-- other namespaces -->
   <xsd:import namespace="http://www.w3.org/XML/1998/namespace"
-    schemaLocation="http://www.w3.org/2001/xml.xsd" /> <!-- http://www.w3.org/2001/xml.xsd -->
+    schemaLocation="http://www.w3.org/2001/xml.xsd" />
 
   <!-- base types for extensible elements -->
   <xsd:complexType name="tExtensibleElements">

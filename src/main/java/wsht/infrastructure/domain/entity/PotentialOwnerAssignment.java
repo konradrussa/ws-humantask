@@ -44,4 +44,5 @@ public class PotentialOwnerAssignment extends GenericHumanRoleAssignmentBase {
 	}
 	
 	
+	
 }

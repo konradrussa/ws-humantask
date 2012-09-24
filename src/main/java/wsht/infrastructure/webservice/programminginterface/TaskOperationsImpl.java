@@ -28,12 +28,14 @@ import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TOrganizati
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TRenderingTypes;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskAbstract;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskDetails;
+import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskHistoryFilter;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskInstanceData;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskOperations;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTaskQueryResultSet;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import wsht.infrastructure.domain.entity.Attachment;
 import wsht.infrastructure.domain.entity.Comment;
@@ -42,6 +44,7 @@ import wsht.infrastructure.domain.entity.OrganizationalEntity;
 import wsht.infrastructure.domain.entity.TaskInfo;
 import wsht.infrastructure.domain.entity.UserSession;
 import wsht.infrastructure.service.IRepositoryService;
+import wsht.infrastructure.web.SessionInfo;
 import wsht.marshalling.IBeanMapper;
 import wsht.marshalling.exception.WSHTException;
 import wsht.runtime.db4o.IDB4oInterface;
@@ -56,7 +59,8 @@ public class TaskOperationsImpl implements TaskOperations {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(TaskOperationsImpl.class);
 	
-	private UserSession userSession;
+	@Autowired
+	private SessionInfo sessionInfo;
 	
 	@Resource
 	private IRepositoryService repositoryService;
@@ -94,7 +98,7 @@ public class TaskOperationsImpl implements TaskOperations {
 		
 		TaskInfo taskInfo = repositoryService.getTaskInfoByTaskIdentifier(identifier);
 		Comment comment = new Comment();
-		comment.setAddedBy(userSession.getName());
+		comment.setAddedBy(sessionInfo.getUserSession().getName());
 		comment.setAddedTime(new Date());
 		comment.setLastModifiedBy(comment.getAddedBy());
 		comment.setLastModifiedTime(comment.getAddedTime());
@@ -415,7 +419,7 @@ public class TaskOperationsImpl implements TaskOperations {
 		//(any state) -> (no state transition)
 		
 		TaskInfo taskInfo = repositoryService.getTaskInfoByTaskIdentifier(taskIdentifier);
-		if(taskInfo.getSubtask()) {
+		if(taskInfo.getIsSubtask()) {
 			return taskInfo.getTaskParent().getTaskIdentifier();
 		}
 		return null;
@@ -495,6 +499,12 @@ public class TaskOperationsImpl implements TaskOperations {
 			IllegalOperationFault {
 
 		//(any state) -> (no state transition)
+		String identifier = getTaskHistory.getIdentifier();
+		TTaskHistoryFilter filter = getTaskHistory.getFilter();
+		Boolean isIncludedData = getTaskHistory.isIncludeData();
+		Integer maxTasks = getTaskHistory.getMaxTasks();
+		Integer startIndex = getTaskHistory.getStartIndex();
+		
 		
 		return null;
 	}
@@ -559,7 +569,7 @@ public class TaskOperationsImpl implements TaskOperations {
 		//(any state) -> (no state transition)
 		
 		TaskInfo taskInfo = repositoryService.getTaskInfoByTaskIdentifier(taskIdentifier);
-		return taskInfo.getSubtask();
+		return taskInfo.getIsSubtask();
 	}
 
 	@Override

@@ -170,7 +170,7 @@ public class RepositoryService implements IRepositoryService {
 	public TaskInfo createTaskInfo(TaskInfo task) {
 		LOGGER.debug("task creation");
 		TaskBase taskBase = null;
-		if(task.getLeanTask()) {
+		if(task.getIsLeanTask()) {
 			taskBase = leanTaskRepository.get(task.getTask().getId());
 		} else {
 			taskBase = taskRepository.get(task.getTask().getId());

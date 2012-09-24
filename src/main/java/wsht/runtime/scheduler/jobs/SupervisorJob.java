@@ -4,21 +4,26 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
+import wsht.infrastructure.configuration.ConfigurationConfigFactory;
+
 public class SupervisorJob extends QuartzJobBean  {
 
-	  private int timeout;
+	private ConfigurationConfigFactory configurationConfigFactory;
 	  
-	  /**
-	   * Setter called after the ExampleJob is instantiated
-	   * with the value from the JobDetailBean (5)
-	   */ 
-	  public void setTimeout(int timeout) {
-	    this.timeout = timeout;
-	  }
 	
+	public ConfigurationConfigFactory getConfigurationConfigFactory() {
+		return configurationConfigFactory;
+	}
+
+	public void setConfigurationConfigFactory(
+			ConfigurationConfigFactory configurationConfigFactory) {
+		this.configurationConfigFactory = configurationConfigFactory;
+	}
+
+
 	@Override
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
-		System.out.println("SupervisorJob executing: " + timeout);
+		
 	}
 
 }
