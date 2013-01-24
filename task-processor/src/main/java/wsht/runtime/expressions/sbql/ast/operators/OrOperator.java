@@ -5,7 +5,7 @@ import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BooleanResult;
 import wsht.runtime.expressions.sbql.qres.result.IntegerResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 import wsht.runtime.expressions.sbql.ast.expressions.BinaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
@@ -39,8 +39,8 @@ public class OrOperator extends BinaryExpression implements IOperator {
 	public void eval() {
 		AbstractQueryResult right = QRES.getInstance().pop(false);
 		AbstractQueryResult left = QRES.getInstance().pop(false);
-		right = Util.deref(right);
-		left = Util.deref(left);
+		right = SBQLUtil.deref(right);
+		left = SBQLUtil.deref(left);
 		AbstractQueryResult result = null;
 		
 		 if (right instanceof BooleanResult && left instanceof BooleanResult) {

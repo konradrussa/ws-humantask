@@ -1,20 +1,16 @@
 
 package org.oasis_open.docs.ns.bpel4people.ws_humantask._200803;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlMixed;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.namespace.QName;
 
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.TOrganizationalEntity;
-import org.w3c.dom.Element;
 
 
 /**
@@ -39,17 +35,19 @@ import org.w3c.dom.Element;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "tLiteral", propOrder = {
-		"organizationalEntity","content"
+		"organizationalEntity"//,"content"
 })
 public class TLiteral {
+	
+    protected TOrganizationalEntity organizationalEntity;
 
-    @XmlMixed
-    @XmlAnyElement(lax = true)
-    protected List<Object> content;
+    //@XmlMixed
+    //@XmlAnyElement(lax = true)
+    //protected List<Object> content;
     @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
-    protected TOrganizationalEntity organizationalEntity;
+
     
     /**
      * Gets the value of the content property.
@@ -75,12 +73,12 @@ public class TLiteral {
      * 
      * 
      */
-    public List<Object> getContent() {
+    /*public List<Object> getContent() {
         if (content == null) {
             content = new ArrayList<Object>();
         }
         return this.content;
-    }
+    }*/
 
     /**
      * Gets a map that contains attributes that aren't bound to any typed property on this class.

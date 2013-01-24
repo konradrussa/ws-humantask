@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import wsht.runtime.expressions.sbql.qres.QRES;
 import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
@@ -29,6 +30,12 @@ public class ENVS {
 			}
 			return instance;
 		}
+	}
+	
+	public static void clear() {
+		ENVS.getInstance().store = null;
+		ENVS.getInstance().stack.clear();
+		QRES.clean();
 	}
 	
 	public void init(boolean clearStack, Long... rootOIDs) {

@@ -10,6 +10,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import wsht.infrastructure.domain.entity.CompletionBehavior;
 import wsht.infrastructure.domain.entity.Composition;
@@ -68,12 +69,15 @@ public abstract class TaskBase extends ExtensibleElementsBase implements
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Deadlines deadlines;
     
+	@NotNull
 	private String name;
     
     @Enumerated(EnumType.STRING)
     private BooleanEnum actualOwnerRequired;
     
-    private Boolean definition;
+    private Boolean definition = true;
+    
+    private Boolean deleted = false;
 
 	public TaskInterface get_interface() {
 		return _interface;
@@ -194,6 +198,14 @@ public abstract class TaskBase extends ExtensibleElementsBase implements
 
 	public void setDefinition(Boolean definition) {
 		this.definition = definition;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 	

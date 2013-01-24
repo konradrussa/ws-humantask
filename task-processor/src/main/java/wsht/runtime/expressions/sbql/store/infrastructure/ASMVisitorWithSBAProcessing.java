@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import wsht.infrastructure.utils.ReflectionUtils;
-import wsht.marshalling.exception.WSHTException;
+import wsht.marshalling.exception.WSHTMarshallingException;
 import wsht.runtime.exceptions.WSHTExpressionException;
 import wsht.runtime.expressions.sbql.store.SBAStore;
 import wsht.runtime.expressions.sbql.store.object.SimpleObject;
@@ -38,6 +38,7 @@ public class ASMVisitorWithSBAProcessing extends SBAProcessing implements Annota
 	public void process() throws WSHTExpressionException {
 		try {
 			currentObject = objects.peek();
+			System.out.println(">>>> ASMVisitorWithSBAProcessing class processing: " + currentObject.getClass().getName());
 			new ClassReader(currentObject.getClass().getName()).accept(this, 0);
 			objects.pop();
 			if(objects.size() > 0) {
@@ -58,7 +59,7 @@ public class ASMVisitorWithSBAProcessing extends SBAProcessing implements Annota
 		
 
 		if(!taskContainerNotProcesseed) {
-			createFirstEntry(currentObject.getClass().getSimpleName());
+			createFirstEntry(currentObjectClassSimpleName());
 			taskContainerNotProcesseed = true;
 		} else {
 			complexObject = processComplexObject(returnObjectName(), complexObject); //from currentObject

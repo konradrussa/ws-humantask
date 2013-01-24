@@ -1,6 +1,7 @@
 package wsht.infrastructure.domain.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.ElementCollection;
@@ -12,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import wsht.infrastructure.domain.entity.TaskInfo;
 import wsht.runtime.enums.GenericHumanRolesEnum;
@@ -31,7 +34,7 @@ public class UserSession implements Serializable {
 	private TaskInfo taskInfo;
 	
 	@ManyToOne
-	private OrganizationalEntity orgEntity;
+	private UserEntityInfo userEntityInfo;
 	
 	@ElementCollection
 	@Enumerated(EnumType.STRING)
@@ -43,6 +46,9 @@ public class UserSession implements Serializable {
 	
 	private boolean active;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,13 +56,13 @@ public class UserSession implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public OrganizationalEntity getOrgEntity() {
-		return orgEntity;
+
+	public UserEntityInfo getUserEntityInfo() {
+		return userEntityInfo;
 	}
 
-	public void setOrgEntity(OrganizationalEntity orgEntity) {
-		this.orgEntity = orgEntity;
+	public void setUserEntityInfo(UserEntityInfo userEntityInfo) {
+		this.userEntityInfo = userEntityInfo;
 	}
 
 	public Set<GenericHumanRolesEnum> getHumanRoles() {
@@ -99,6 +105,13 @@ public class UserSession implements Serializable {
 		this.name = name;
 	}
 	
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 	
 	//methods
 

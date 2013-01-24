@@ -15,7 +15,7 @@
 		<class-a>org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TLiteral</class-a>
 		<class-b>wsht.infrastructure.domain.entity.Literal</class-b>
 		<field custom-converter="wsht.marshalling.converter.JAXBElementConverter">
-			<a>content</a>
+			<a>organizationalEntity</a>
 			<b>organizationalEntity</b>
 		</field>
 	</mapping>

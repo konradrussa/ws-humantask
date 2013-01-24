@@ -5,6 +5,7 @@ import akka.dispatch.Future
 import akka.pattern.ask
 import akka.util.Timeout
 import akka.util.duration._
+import wsht.runtime.communication.TaskServiceImpl
 
 case class Request(payload: String)
 case class Response(payload: String)
@@ -35,9 +36,9 @@ class ServiceActor extends Actor {
 object TypedAct extends App {
   val system = ActorSystem("TypedActorDemo")
 
-  val service: Service =
+  /*val service: Service =
     TypedActor(system).typedActorOf(
-      TypedProps[ServiceImpl]()
+      TypedProps[TaskServiceImpl]()
     )
 
   val req = Request("hello world!")
@@ -46,5 +47,5 @@ object TypedAct extends App {
     case Response(response) =>
       println(response)
       system.shutdown()
-  }
+  }*/
 }

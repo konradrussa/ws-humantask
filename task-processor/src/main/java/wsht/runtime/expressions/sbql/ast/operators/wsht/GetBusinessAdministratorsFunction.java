@@ -10,7 +10,7 @@ import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
-import wsht.runtime.expressions.sbql.store.Container;
+import wsht.runtime.expressions.sbql.store.TaskInstance;
 
 /*
  * Returns the business administrators of the task.
@@ -33,11 +33,11 @@ public class GetBusinessAdministratorsFunction extends WSHTOperator implements I
 		
 		AbstractQueryResult res = QRES.getInstance().pop(true);
 		if(res == null) {
-			BagResult resOut = ENVS.getInstance().bind(Container._F_businessAdministratorsField);
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_businessAdministratorsField);
 			QRES.getInstance().push(resOut);
 		} else if(res instanceof StringResult) {
 			//BagResult resOut = ENVS.getInstance().bind(((StringResult) res).getValue());
-			BagResult resOut = ENVS.getInstance().bind(Container._F_businessAdministratorsField);
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_businessAdministratorsField);
 			QRES.getInstance().push(resOut);
 		} else {
 			throw new SBQLEvalException("GetBusinessAdministratorsFunction.eval - nieobslugiwana ilosc agrumentow");

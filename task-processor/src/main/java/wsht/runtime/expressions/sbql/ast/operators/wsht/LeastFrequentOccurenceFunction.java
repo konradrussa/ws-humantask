@@ -14,7 +14,7 @@ import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 /*
 Returns the least frequently occurring string value within all string nodes, 
@@ -36,8 +36,9 @@ public class LeastFrequentOccurenceFunction extends UnaryExpression implements I
 		if(res instanceof BagResult) {
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
+					stringList.add(((StringResult)r).getValue());
 				} else {
 					throw new SBQLEvalException("LeastFrequentOccurenceFunction.eval - element nie jest wartoscia string");
 				}
@@ -45,8 +46,9 @@ public class LeastFrequentOccurenceFunction extends UnaryExpression implements I
 		} else if(res instanceof StructResult) {
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
+					stringList.add(((StringResult)r).getValue());
 				} else {
 					throw new SBQLEvalException("LeastFrequentOccurenceFunction.eval - element nie jest wartoscia string");
 				}

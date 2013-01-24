@@ -20,7 +20,6 @@ import com.sun.xml.wss.XWSSProcessor;
 import com.sun.xml.wss.XWSSProcessorFactory;
 import com.sun.xml.wss.XWSSecurityException;
 
-@Component
 public class SecurityHandler implements SOAPHandler<SOAPMessageContext> {
    
     XWSSProcessor sprocessor = null;

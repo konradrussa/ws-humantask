@@ -14,7 +14,7 @@ import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 /*
 Returns the most frequently occurring string value within all string nodes, or an empty string in case of a tie or for an empty node-set
@@ -35,9 +35,9 @@ public class MostFrequentOccurenceFunction extends UnaryExpression implements IO
 		if(res instanceof BagResult) {
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
-					
+					stringList.add(((StringResult)r).getValue());
 				} else {
 					throw new SBQLEvalException("MostFrequentOccurenceFunction.eval - element nie jest wartoscia string");
 				}
@@ -45,9 +45,9 @@ public class MostFrequentOccurenceFunction extends UnaryExpression implements IO
 		} else if(res instanceof StructResult) {
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
-					
+					stringList.add(((StringResult)r).getValue());
 				} else {
 					throw new SBQLEvalException("MostFrequentOccurenceFunction.eval - element nie jest wartoscia string");
 				}

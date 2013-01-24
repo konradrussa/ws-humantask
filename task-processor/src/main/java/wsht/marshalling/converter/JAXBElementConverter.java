@@ -30,6 +30,10 @@ public class JAXBElementConverter implements ConfigurableCustomConverter,
 			return null;
 		}
 		if (sourceFieldValue instanceof JAXBElement
+				&& destinationClass == JAXBElement.class) {
+			System.out.println("_^_^_^_" + "sourceFieldValue instanceof JAXBElement && destinationClass == JAXBElement.class" + "_^_^_^_");
+		}
+		if (sourceFieldValue instanceof JAXBElement
 				&& destinationClass != JAXBElement.class) {
 			return mapper.map(((JAXBElement) sourceFieldValue).getValue(),
 					destinationClass);
@@ -43,33 +47,39 @@ public class JAXBElementConverter implements ConfigurableCustomConverter,
 						if(existingDestinationFieldValue == null) {
 							existingDestinationFieldValue = new ArrayList();
 						}
-						((ArrayList) existingDestinationFieldValue).add(mapper.map(((JAXBElement) o).getValue(),
-								GenericHumanRoleAssignment.class));
+						GenericHumanRoleAssignment r = mapper.map(((JAXBElement) o).getValue(), GenericHumanRoleAssignment.class);
+						r.setName(((JAXBElement) o).getName().getLocalPart());
+						((ArrayList) existingDestinationFieldValue).add(r);
 					} 
 					if(((JAXBElement) o).getValue() instanceof TPotentialOwnerAssignment) {
 						if(existingDestinationFieldValue == null) {
 							existingDestinationFieldValue = new ArrayList();
 						}
-						((ArrayList) existingDestinationFieldValue).add(mapper.map(((JAXBElement) o).getValue(),
-								PotentialOwnerAssignment.class));
+						PotentialOwnerAssignment po = mapper.map(((JAXBElement) o).getValue(), PotentialOwnerAssignment.class);
+						po.setName(((JAXBElement) o).getName().getLocalPart());
+						((ArrayList) existingDestinationFieldValue).add(po);
 					}
-					if(((JAXBElement) o).getValue() instanceof TOrganizationalEntity) {
-						existingDestinationFieldValue = new OrganizationalEntity();
-						((OrganizationalEntity)existingDestinationFieldValue).setGroupOrg(new HashSet<String>());
-						((OrganizationalEntity)existingDestinationFieldValue).setUserOrg(new HashSet<String>());
-						TOrganizationalEntity oe = (TOrganizationalEntity) ((JAXBElement) o).getValue();
-						for(JAXBElement<String> e : oe.getUserOrGroup()) {
-							if(e.getName().toString().equals("{http://docs.oasis-open.org/ns/bpel4people/ws-humantask/types/200803}user")) {
-								((OrganizationalEntity)existingDestinationFieldValue).getUserOrg().add(e.getValue());
-							} else {
-								((OrganizationalEntity)existingDestinationFieldValue).getGroupOrg().add(e.getValue());
-							}
-						}
-					} 
+					
 				}
 			}
 			return existingDestinationFieldValue;
 		}
+		
+		if(sourceFieldValue instanceof TOrganizationalEntity) {
+			existingDestinationFieldValue = new OrganizationalEntity();
+			((OrganizationalEntity)existingDestinationFieldValue).setGroupOrg(new HashSet<String>());
+			((OrganizationalEntity)existingDestinationFieldValue).setUserOrg(new HashSet<String>());
+			TOrganizationalEntity oe = (TOrganizationalEntity) sourceFieldValue;
+			for(JAXBElement<String> e : oe.getUserOrGroup()) {
+				if(e.getName().toString().equals("{http://docs.oasis-open.org/ns/bpel4people/ws-humantask/types/200803}user")) {
+					((OrganizationalEntity)existingDestinationFieldValue).getUserOrg().add(e.getValue());
+				} else {
+					((OrganizationalEntity)existingDestinationFieldValue).getGroupOrg().add(e.getValue());
+				}
+			}
+			return existingDestinationFieldValue;
+		} 
+		
 		if (sourceClass != JAXBElement.class
 				&& destinationClass == JAXBElement.class) {
 			String innerClassName = innerClass.getCanonicalName();

@@ -1,5 +1,7 @@
 package wsht.infrastructure.webservice.commons;
 
+import java.util.UUID;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.WebServiceContext;
@@ -12,7 +14,11 @@ import org.springframework.security.web.session.HttpSessionDestroyedEvent;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import wsht.exception.WSHTException;
+import wsht.infrastructure.domain.entity.UserEntityInfo;
+import wsht.infrastructure.repository.IUserEntityInfoRepository;
 import wsht.infrastructure.repository.IUserSessionRepository;
+import wsht.infrastructure.service.IRepositoryService;
 import wsht.infrastructure.web.UserInfo;
 import wsht.infrastructure.webservice.WSHTService;
 import wsht.infrastructure.webservice.exceptions.WSHTWebServiceException;
@@ -23,39 +29,45 @@ public class AuthenticatorWebServiceImpl extends WSHTService implements Authenti
 	private WebServiceContext wsContext;
 	
 	@Resource
-	private IUserSessionRepository userSessionRepository;
-	
+	private IRepositoryService repositoryService;
 
 	
 	public UserInfo logIn(UserInfo userInfo) throws WSHTWebServiceException {
-		MessageContext messageContext = wsContext.getMessageContext();
-		userInfo.setLoggedIn(true);
-		sessionInfo.setUserInfo(userInfo);
-		String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
-		getUsersMap().put(sessionId, sessionInfo.getUserInfo().getUserName());
+		
+		try {
+			UserEntityInfo userEntityInfo = repositoryService.getUserEntity(userInfo.getUserName(), userInfo.getPassword());
+			userInfo.setLoggedIn(true);
+			getSessionInfo().setUserInfo(userInfo);
+			
+			//String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+			//getUsersMap().put(UUID.randomUUID().toString().substring(0,6), getSessionInfo().getUserInfo().getUserName());
+		} catch (WSHTException e) {
+			throw new WSHTWebServiceException(e.getMessage());
+		}
+		
 		return userInfo;
 	}
 
 	
 	public void logOut() throws WSHTWebServiceException {
 		
-		String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
-		this.getUsersMap().remove(sessionId);
+		//String sessionId = RequestContextHolder.getRequestAttributes().getSessionId();
+		//this.getUsersMap().remove(sessionId);
 		
-		if(sessionInfo.getUserInfo() != null && sessionInfo.getUserInfo().getLoggedIn()) {
-			sessionInfo.setUserInfo(null);
-			((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().invalidate();
+		if(getSessionInfo().getUserInfo() != null && getSessionInfo().getUserInfo().getLoggedIn()) {
+			getSessionInfo().setUserInfo(null);
+			//((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getSession().invalidate();
 			
 		}
 	}
 	
 	
 	public boolean checkLoggedIn() throws WSHTWebServiceException {
-		return (sessionInfo.getUserInfo() != null && sessionInfo.getUserInfo().getLoggedIn());
+		return (getSessionInfo().getUserInfo() != null && getSessionInfo().getUserInfo().getLoggedIn());
 	}
 	
 	public boolean checkCurrentUser(UserInfo userInfo)throws WSHTWebServiceException {
-		return (sessionInfo.getUserInfo() != null && sessionInfo.getUserInfo().equals(userInfo));
+		return (getSessionInfo().getUserInfo() != null && getSessionInfo().getUserInfo().equals(userInfo));
 	}
 
 	public void onApplicationEvent(ApplicationEvent event) {

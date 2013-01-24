@@ -7,7 +7,7 @@ import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.IntegerResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
 import wsht.runtime.expressions.sbql.ast.expressions.UnaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
@@ -45,7 +45,7 @@ public class SumOperator extends UnaryExpression implements IOperator {
 		if(res instanceof BagResult) {
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof IntegerResult) {
 					double value = ((IntegerResult)r).getValue().doubleValue();
 					eres.setValue(eres.getValue() + value);
@@ -58,7 +58,7 @@ public class SumOperator extends UnaryExpression implements IOperator {
 		} else if(res instanceof StructResult) {
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof IntegerResult) {
 					double value = ((IntegerResult)r).getValue().doubleValue();
 					eres.setValue(eres.getValue() + value);

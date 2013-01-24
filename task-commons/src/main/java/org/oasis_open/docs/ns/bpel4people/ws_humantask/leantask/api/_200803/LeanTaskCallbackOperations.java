@@ -5,6 +5,7 @@ import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.RequestWrapper;
 
@@ -21,6 +22,7 @@ import javax.xml.ws.RequestWrapper;
     org.oasis_open.docs.ns.bpel4people.ws_humantask.types._200803.ObjectFactory.class,
     org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.ObjectFactory.class
 })
+//@SOAPBinding(style=SOAPBinding.Style.DOCUMENT, parameterStyle=SOAPBinding.ParameterStyle.BARE) //moje
 public interface LeanTaskCallbackOperations {
 
 
@@ -28,9 +30,13 @@ public interface LeanTaskCallbackOperations {
      * 
      * @param outputMessage
      */
-    @WebMethod(action = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803/createLeanTaskAsyncCallback")
+	//generated causes errors
+    //@WebMethod(action = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803/createLeanTaskAsyncCallback")
+    //@Oneway
+    //@RequestWrapper(localName = "createLeanTaskAsyncCallback", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803", className = "org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsyncCallback")
+    @WebMethod(operationName= "createLeanTaskAsyncResponse", action = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803/createLeanTaskAsyncCallback")
     @Oneway
-    @RequestWrapper(localName = "createLeanTaskAsyncCallback", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803", className = "org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsyncCallback")
+    @RequestWrapper(localName = "createLeanTaskAsyncResponse", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803", className = "org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsyncCallback")
     public void createLeanTaskAsyncCallback(
         @WebParam(name = "outputMessage", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803")
         org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsyncCallback.OutputMessage outputMessage);

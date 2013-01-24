@@ -48,6 +48,7 @@ public class LeanTaskOperationsClientEndpoint implements LeanTaskOperations {
 			org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsync.InputMessage inputMessage,
 			TLeanTask taskDefinition, String taskName)
 			throws IllegalAccessFault, IllegalArgumentFault {
+		service.setUpAddressingProperties();
 		service.getService().createLeanTaskAsync(inputMessage, taskDefinition, taskName);
 		
 	}

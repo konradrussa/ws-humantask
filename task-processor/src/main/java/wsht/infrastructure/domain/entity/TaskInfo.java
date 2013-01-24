@@ -13,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -57,17 +58,35 @@ public class TaskInfo implements Serializable {
 	private TaskInfo taskParent;
 	
 	@ManyToOne
-	private OrganizationalEntity owner;
+	private UserEntityInfo owner;
+	
+	@ManyToMany(mappedBy="potentialOwnerTaskInfos")
+	private List<UserEntityInfo> potentialOwners;
+	
+	@ManyToMany(mappedBy="businessAdministratorTaskInfos")
+	private List<UserEntityInfo> businessAdministrators;
+	
+	@OneToMany(orphanRemoval=true,mappedBy="taskInfo")
+	private List<UserSession> currentOwnerStack;
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private TaskStatesEnum state;
 	
-	@OneToMany(orphanRemoval=true,mappedBy="taskInfo")
-	private List<UserSession> currentOwnerStack;
+	@Column
+	private Integer priority;
+	
+	@Column
+	private Boolean escalated;
 	
 	@Column(name="created", columnDefinition="TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP")
 	private Date created;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date activated;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date expired;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modified;
@@ -110,6 +129,38 @@ public class TaskInfo implements Serializable {
 		this.state = state;
 	}
 
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+	
+	public Boolean getEscalated() {
+		return escalated;
+	}
+
+	public void setEscalated(Boolean escalated) {
+		this.escalated = escalated;
+	}
+
+	public Date getActivated() {
+		return activated;
+	}
+
+	public void setActivated(Date activated) {
+		this.activated = activated;
+	}
+
+	public Date getExpired() {
+		return expired;
+	}
+
+	public void setExpired(Date expired) {
+		this.expired = expired;
+	}
+
 	public String getTaskIdentifier() {
 		return taskIdentifier;
 	}
@@ -118,11 +169,11 @@ public class TaskInfo implements Serializable {
 		this.taskIdentifier = taskIdentifier;
 	}
 
-	public OrganizationalEntity getOwner() {
+	public UserEntityInfo getOwner() {
 		return owner;
 	}
 
-	public void setOwner(OrganizationalEntity owner) {
+	public void setOwner(UserEntityInfo owner) {
 		this.owner = owner;
 	}
 
@@ -198,8 +249,24 @@ public class TaskInfo implements Serializable {
 		this.taskParent = taskParent;
 	}
 	
-	//methods
+	public List<UserEntityInfo> getPotentialOwners() {
+		return potentialOwners;
+	}
 
+	public void setPotentialOwners(List<UserEntityInfo> potentialOwners) {
+		this.potentialOwners = potentialOwners;
+	}
+
+	public List<UserEntityInfo> getBusinessAdministrators() {
+		return businessAdministrators;
+	}
+
+	public void setBusinessAdministrators(
+			List<UserEntityInfo> businessAdministrators) {
+		this.businessAdministrators = businessAdministrators;
+	}
+	
+	//methods
 
 	public boolean checkPermission(OperationsEnum operation) {
 		return OperationsAuthorization.checkPreStatePermission(operation, this);

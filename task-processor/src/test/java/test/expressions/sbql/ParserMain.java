@@ -8,14 +8,16 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 
-import test.infrastructure.ClaimApprovalRequest;
+import object.ClaimApprovalRequest;
+import object.Customer;
+import object.Location;
 import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.QRES;
 import wsht.runtime.expressions.sbql.qres.grammar.SBQLLexer;
 import wsht.runtime.expressions.sbql.qres.grammar.SBQLParser;
 import wsht.runtime.expressions.sbql.store.SBAStore;
 import wsht.runtime.expressions.sbql.store.object.ComplexObject;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 
 
@@ -24,9 +26,11 @@ public class ParserMain {
 	public static void main(String[] args) throws  IOException {
 		
 		SBAStore store = new SBAStore();
-		store.loadContainer(new ClaimApprovalRequest());
+		//Customer person = 
+		String region = "regionalClerks";
+
+		//store.loadContainer(
 		store.printDataStore();
-		ENVS.getInstance().setStore(store);
 		
 		List<Long> rootOIDs = ((ComplexObject)store.objectMap.get(0L)).childOIDs;
 		ENVS.getInstance().init(true,rootOIDs.toArray(new Long[0]));
@@ -222,7 +226,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -238,7 +242,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -254,7 +258,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -271,7 +275,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -319,7 +323,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -335,7 +339,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -351,7 +355,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -367,7 +371,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -383,7 +387,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -399,7 +403,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -415,7 +419,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -431,7 +435,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -447,7 +451,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -463,7 +467,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -479,7 +483,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -495,7 +499,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -511,7 +515,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -527,7 +531,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -543,7 +547,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -559,7 +563,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -575,7 +579,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -591,7 +595,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -607,7 +611,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -623,7 +627,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -639,7 +643,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -655,7 +659,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -671,7 +675,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -687,7 +691,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -703,7 +707,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -719,7 +723,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -735,7 +739,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -767,7 +771,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -783,7 +787,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -799,7 +803,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -815,7 +819,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -831,7 +835,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -847,7 +851,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -863,7 +867,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -879,7 +883,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -894,7 +898,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -909,7 +913,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -924,7 +928,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -939,7 +943,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -954,7 +958,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -969,7 +973,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -984,7 +988,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -999,7 +1003,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1014,7 +1018,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1029,7 +1033,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1044,7 +1048,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1059,7 +1063,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1134,7 +1138,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1149,7 +1153,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1164,7 +1168,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1179,7 +1183,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1194,7 +1198,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1209,7 +1213,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1224,7 +1228,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1239,7 +1243,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1254,7 +1258,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1269,7 +1273,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1284,7 +1288,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1299,7 +1303,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1314,7 +1318,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1329,7 +1333,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1344,7 +1348,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1359,7 +1363,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1374,7 +1378,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1389,7 +1393,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1404,7 +1408,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1420,7 +1424,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1435,7 +1439,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1450,7 +1454,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1465,7 +1469,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1480,7 +1484,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1495,7 +1499,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1510,7 +1514,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1525,7 +1529,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1540,7 +1544,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1555,7 +1559,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1570,7 +1574,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1585,7 +1589,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1600,7 +1604,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1615,7 +1619,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1630,7 +1634,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1645,7 +1649,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1660,7 +1664,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1675,7 +1679,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1690,7 +1694,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1705,7 +1709,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1720,7 +1724,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1735,7 +1739,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1780,7 +1784,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1795,7 +1799,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1810,7 +1814,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1825,7 +1829,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1840,7 +1844,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1855,7 +1859,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1870,7 +1874,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -1885,7 +1889,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();
@@ -2200,7 +2204,7 @@ public class ParserMain {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		System.out.println(Util.deref(QRES.getInstance().pop(false)));
+		System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 		System.out.println("QRES " + QRES.getInstance().getStackSize());
 		System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 		System.out.println();

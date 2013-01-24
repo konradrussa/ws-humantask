@@ -18,13 +18,34 @@
 		<aop:scoped-proxy />
 	</bean>
 	
+	<bean id="activationService" class="wsht.infrastructure.web.service.ActivationSessionService" scope="session">
+		<property name="endpoint" value="${endpoint.processor.part}${endpoint.coordinator}" />
+		<property name="bus" ref="cxf" />
+		<aop:scoped-proxy/>
+	</bean>
+	
+	<bean id="registrationService" class="wsht.infrastructure.web.service.RegistrationSessionService" scope="session">
+		<property name="endpoint" value="${endpoint.processor.part}${endpoint.coordinator}" />
+		<property name="bus" ref="cxf" />
+		<aop:scoped-proxy/>
+	</bean>
+	
+	
+	<bean id="coordinatorWebServicesClient" class="wsht.infrastructure.web.service.endpoint.CoordinationClientEndpoint">
+		<property name="activationSessionService" ref="activationService" />
+		<property name="registrationSessionService" ref="registrationService" />
+		<property name="sessionInfo" ref="sessionInfo" />
+	</bean>
+	
 	<bean id="leanTaskOperationsWebServicesClient" class="wsht.infrastructure.web.service.endpoint.LeanTaskOperationsClientEndpoint">
 		<property name="service" ref="leanTaskOperationsService" />
 	</bean>
 		
 	<bean id="leanTaskOperationsService" class="wsht.infrastructure.web.service.LeanTaskOperationsSessionService" scope="session">
-		<property name="endpoint" value="${endpoint.common.part}${endpoint.leantaskoperations}" />
+		<property name="endpoint" value="${endpoint.processor.part}${endpoint.leantaskoperations}" />
+		<property name="callbackEndpoint" value="${endpoint.parent.part}${endpoint.leantaskcallbackoperations}"></property>
 		<property name="bus" ref="cxf" />
+		<property name="externalContextObjects" ref="externalContextObjects" />
 		<aop:scoped-proxy/>
 	</bean>
 	
@@ -33,7 +54,7 @@
 	</bean>
 		
 	<bean id="humanParticipantService" class="wsht.infrastructure.web.service.HumanTaskParticipantPortTypeSessionService" scope="session">
-		<property name="endpoint" value="${endpoint.common.part}${endpoint.humanparticipant}" />
+		<property name="endpoint" value="${endpoint.processor.part}${endpoint.humanparticipant}" />
 		<property name="bus" ref="cxf" />
 		<aop:scoped-proxy/>
 	</bean>
@@ -44,7 +65,7 @@
 	</bean>
 		
 	<bean id="authService" class="wsht.infrastructure.web.service.AuthenticationSessionService" scope="session">
-		<property name="endpoint" value="${endpoint.common.part}${endpoint.authentication}" />
+		<property name="endpoint" value="${endpoint.processor.part}${endpoint.authentication}" />
 		<property name="bus" ref="cxf" />
 		<aop:scoped-proxy/>
 	</bean>

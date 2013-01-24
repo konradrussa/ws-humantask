@@ -15,7 +15,7 @@ import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.BooleanResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 /*
 Returns the most frequently occurring boolean value if its occurrence 
@@ -49,7 +49,7 @@ public class VoteFunction extends UnaryExpression implements IOperator {
 		}
 		
 		this.percentage = ((RealResult)term.getElements().get(1)).getValue().floatValue();
-		if(percentage == null || percentage > 100) {
+		if(percentage > 100) {
 			throw new SBQLEvalException("VoteFunction.eval - parametr procent niewlasciwy");
 		}
 		BooleanResult eres = new BooleanResult();
@@ -58,7 +58,7 @@ public class VoteFunction extends UnaryExpression implements IOperator {
 		if(res instanceof BagResult) {
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof BooleanResult) {
 					boolList.add(((BooleanResult) r).isValue());
 				} else {
@@ -68,7 +68,7 @@ public class VoteFunction extends UnaryExpression implements IOperator {
 		} else if(res instanceof StructResult) {
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof BooleanResult) {
 					boolList.add(((BooleanResult) r).isValue());
 				} else {

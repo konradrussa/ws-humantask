@@ -12,6 +12,7 @@ import javax.xml.ws.Service;
 import javax.xml.ws.handler.Handler;
 
 
+
 import org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TLeanTask;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskAsync;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.IllegalAccessFault;
@@ -29,7 +30,7 @@ public class ClientLeanTaskOperations {
 		
 		
 		System.setProperty("javax.xml.ws.addressing.AddressingBuilder", "com.sun.xml.ws.addressing.v200408.AddressingBuilderImpl");
-		URL url = new URL("http://localhost:8081/leanTaskOperations?wsdl");
+		URL url = new URL("http://localhost:8081/services/leanTaskOperations?wsdl");
 		QName qname = new QName("http://leantask.webservice.infrastructure.wsht/", "LeanTaskOperationsImplService");
 		Service service = Service.create(url, qname);
 		LeanTaskOperations stub = service.getPort(LeanTaskOperations.class);

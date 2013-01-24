@@ -1,0 +1,25 @@
+<xwss:SecurityConfiguration xmlns:xwss="http://java.sun.com/xml/ns/xwss/config"
+	dumpMessages="true">
+	<xwss:Timestamp />
+	<xwss:Sign includeTimestamp="false">
+		<xwss:X509Token certificateAlias="xws-security-client" />
+		<xwss:CanonicalizationMethod algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+		<xwss:SignatureMethod algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+		<xwss:SignatureTarget type="xpath" value="//SOAP-ENV:Body">
+			<xwss:Transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+		</xwss:SignatureTarget>
+		<xwss:SignatureTarget type="xpath" value="//wsu:Timestamp">
+			<xwss:Transform algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+		</xwss:SignatureTarget>
+	</xwss:Sign>
+	<xwss:Encrypt>
+		<xwss:X509Token keyReferenceType="Identifier"
+			certificateAlias="xws-security-server" />
+	</xwss:Encrypt>
+
+	<xwss:RequireEncryption />
+	<xwss:RequireSignature />
+	<xwss:RequireTimestamp maxClockSkew="4000"
+		timestampFreshnessLimit="5000" />
+</xwss:SecurityConfiguration>
+ 

@@ -1,7 +1,10 @@
 package wsht.infrastructure.web;
 
-public class UserInfo {
+import java.io.Serializable;
 
+public class UserInfo implements Serializable {
+	private static final long serialVersionUID = 3502788594640215513L;
+	
 	private String userName;
 	private String password;
 	private String ipAddress;

@@ -8,7 +8,7 @@ import wsht.runtime.expressions.sbql.qres.result.BooleanResult;
 import wsht.runtime.expressions.sbql.qres.result.IntegerResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 import wsht.runtime.expressions.sbql.ast.expressions.BinaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
@@ -31,10 +31,10 @@ public class MinusOperator extends BinaryExpression implements IOperator {
 		BagResult bagRes2 = (BagResult)e2;
 		
 		for(AbstractQueryResult r1: bagRes1.getElements()) {
-			r1 = Util.deref(r1);
+			r1 = SBQLUtil.deref(r1);
 			boolean checker = false;
 			for(AbstractQueryResult r2: bagRes2.getElements()) {
-				r2 = Util.deref(r2);
+				r2 = SBQLUtil.deref(r2);
 				if(checkValue(r1,r2)) 
 					checker = true;
 			}

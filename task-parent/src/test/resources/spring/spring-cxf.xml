@@ -31,14 +31,32 @@
 	</bean>
 
 	<bean id="ïnteroperableProtocol-ClientParticipantPortType"
-		class="wsht.infrastructure.webservice.interoperableprotocol.ClientParticipantPortTypeImpl">
+		class="wsht.infrastructure.webservice.interoperableprotocol.ClientParticipantPortTypeImpl" scope="session">
+		<aop:scoped-proxy/>
+	</bean>
+	
+	<bean id="leanTask-LeanTaskCallbackOperations"
+		class="wsht.infrastructure.webservice.leantask.LeanTaskCallbackOperationsImpl" scope="session">
+		<aop:scoped-proxy/>
 	</bean>
 	
 	<jaxws:endpoint implementor="#ïnteroperableProtocol-ClientParticipantPortType"
-		address="${endpoint.common.part}${endpoint.clientparticipant}">
+		address="${endpoint.parent.part}${endpoint.clientparticipant}" bus="cxf">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
+	</jaxws:endpoint>
+	
+	<jaxws:endpoint implementor="#leanTask-LeanTaskCallbackOperations"
+		address="${endpoint.parent.part}${endpoint.leantaskcallbackoperations}" bus="cxf">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+		<jaxws:properties>
+           <entry key="jaxb.additionalContextClasses">
+           		<ref bean="externalContextObjects"/> 
+           </entry>
+       </jaxws:properties>
 	</jaxws:endpoint>
 
 

@@ -1,25 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<!-- parent>
-		<artifactId>ws-humantask</artifactId>
-		<groupId>wsht</groupId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath></relativePath>
-	</parent-->
+	<!-- parent> <artifactId>ws-humantask</artifactId> <groupId>wsht</groupId> 
+		<version>0.0.1-SNAPSHOT</version> <relativePath></relativePath> </parent -->
 	<groupId>wsht</groupId>
 	<version>0.0.1-SNAPSHOT</version>
+
+
 	<artifactId>task-processor</artifactId>
 	<packaging>war</packaging>
 	<name>task-processor</name>
 	<description />
 
 	<properties>
-		<cxf.version>2.4.2</cxf.version>
-		<akka.version>2.0.3</akka.version>
+		<jettyVersion>7.2.0.v20101020</jettyVersion>
+		<cxf.version>2.4.2</cxf.version> <!-- 2.4.2 -->
+		<akka.version>2.0.4</akka.version>
 		<scala.version>2.9.2</scala.version>
 		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<asm.version>3.1</asm.version>
 	</properties>
 
 
@@ -45,8 +45,12 @@
 			<url>http://download.java.net/maven/2/</url>
 		</repository>
 		<repository>
-			<id>maven.org</id>
+			<id>maven2.org</id>
 			<url>http://repo2.maven.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>maven1.org</id>
+			<url>http://repo1.maven.org/maven2</url>
 		</repository>
 		<repository>
 			<id>jboss</id>
@@ -55,7 +59,7 @@
 				<enabled>true</enabled>
 			</releases>
 		</repository>
-		
+
 		<repository>
 			<id>scala</id>
 			<url>https://oss.sonatype.org/content/groups/scala-tools/</url>
@@ -83,7 +87,7 @@
 			<name>JBoss Maven2 Repository</name>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
 		</pluginRepository>
-		
+
 	</pluginRepositories>
 
 
@@ -221,41 +225,17 @@
 				</configuration>
 			</plugin>
 
-			<!-- plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>xjc</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<schemaDirectory>${basedir}/src/main/xjb</schemaDirectory>
-					<outputDirectory>${basedir}/src/main/out</outputDirectory>
-				</configuration>
-			</plugin-->
+			<!-- plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>jaxb2-maven-plugin</artifactId> 
+				<version>1.3</version> <executions> <execution> <goals> <goal>xjc</goal> 
+				</goals> </execution> </executions> <configuration> <schemaDirectory>${basedir}/src/main/xjb</schemaDirectory> 
+				<outputDirectory>${basedir}/src/main/out</outputDirectory> </configuration> 
+				</plugin -->
 
-			<!-- plugin>
-				<groupId>org.jboss.ws.plugins</groupId>
-				<artifactId>maven-jaxws-tools-plugin</artifactId>
-				<version>1.0.0.GA</version>
-				<configuration>
-					<verbose>true</verbose>
-					<wsdls>
-						<wsdl>${basedir}/src/main/resources/oasis/wstx-wscoor-1.1-wsdl-200702.wsdl</wsdl>
-					</wsdls>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>wsconsume</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin-->
+			<!-- plugin> <groupId>org.jboss.ws.plugins</groupId> <artifactId>maven-jaxws-tools-plugin</artifactId> 
+				<version>1.0.0.GA</version> <configuration> <verbose>true</verbose> <wsdls> 
+				<wsdl>${basedir}/src/main/resources/oasis/ws-humantask-leantask-api.wsdl</wsdl> 
+				</wsdls> </configuration> <executions> <execution> <goals> <goal>wsconsume</goal> 
+				</goals> </execution> </executions> </plugin -->
 
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
@@ -264,6 +244,33 @@
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.4</version>
+			</plugin>
+
+
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jettyVersion}</version>
+				<configuration>
+					<reload>MANUAL</reload>
+					<webAppConfig>
+						<contextPath>/</contextPath>
+						<descriptor>${basedir}\src\main\webapp\WEB-INF\web.xml</descriptor>
+					</webAppConfig>
+					<scanTargetPatterns>
+						<scanTargetPattern>
+							<directory>src/main/resources</directory>
+							<includes>
+								<include>**/*.xml</include>
+								<include>**/*.properties</include>
+							</includes>
+							<excludes>
+								<exclude>**/fake.xml</exclude>
+								<exclude>**/fake.properties</exclude>
+							</excludes>
+						</scanTargetPattern>
+					</scanTargetPatterns>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -284,29 +291,15 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-actor-tests</artifactId>
-			<version>${akka.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.typesafe.akka</groupId>
-			<artifactId>akka-testkit</artifactId>
-			<version>${akka.version}</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.scalatest</groupId>
 			<artifactId>scalatest_2.9.2</artifactId>
 			<version>1.8</version>
+			<scope>test</scope>
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
+		<!--dependency> <groupId>org.scala-lang</groupId> <artifactId>scala-library</artifactId> 
+			<version>${scala.version}</version> </dependency -->
 
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
@@ -326,52 +319,11 @@
 			<version>${akka.version}</version>
 		</dependency>
 
-
-
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-kernel</artifactId>
 			<version>${akka.version}</version>
 		</dependency>
-
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>xml-security</groupId>
-			<artifactId>xmlsec</artifactId>
-			<version>1.3.0</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>com.sun.xml.wss</groupId>
-			<artifactId>xws-security</artifactId>
-			<version>3.0</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/xws-security-3.0.jar</systemPath>
-		</dependency>
-
-		<dependency>
-			<groupId>com</groupId>
-			<artifactId>db4o</artifactId>
-			<version>8.0.249.16098-all-java5</version>
-			<scope>system</scope>
-			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/db4o-8.0.249.16098-all-java5.jar</systemPath>
-		</dependency>
-
-
-
-
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-			<version>2.10.0</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -405,13 +357,24 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-expression</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -463,20 +426,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.1</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.0.3</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.0-api</artifactId>
 			<version>1.0.1.Final</version>
@@ -505,6 +454,15 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.1-902.jdbc4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com</groupId>
+			<artifactId>db4o</artifactId>
+			<version>8.0.249.16098-all-java5</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/db4o-8.0.249.16098-all-java5.jar</systemPath>
+		</dependency>
+
 
 		<dependency>
 			<groupId>c3p0</groupId>
@@ -548,11 +506,28 @@
 			<version>3.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.1</version>
+			<groupId>asm</groupId> <!-- org.ow2.asm -->
+			<artifactId>asm-analysis</artifactId>
+			<version>${asm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-commons</artifactId>
+			<version>${asm.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>asm</groupId>
+			<artifactId>asm-util</artifactId>
+			<version>${asm.version}</version>
 		</dependency>
 
 		<dependency>
@@ -562,50 +537,105 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jdom</groupId>
-			<artifactId>jdom</artifactId>
-			<version>1.1.3</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-analysis</artifactId>
-			<version>3.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-commons</artifactId>
-			<version>3.3</version>
-		</dependency>
-
-		<dependency>
-			<groupId>asm</groupId>
-			<artifactId>asm-util</artifactId>
-			<version>3.3</version>
-		</dependency>
 
 		<dependency>
 			<groupId>wsht</groupId>
 			<artifactId>task-commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
-			<groupId>org.jboss.ws.native</groupId>
-			<artifactId>jbossws-native-core</artifactId>
-			<version>3.4.1.GA</version>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.10.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-security</groupId>
+			<artifactId>xmlsec</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.wss</groupId>
+			<artifactId>xws-security</artifactId>
+			<version>3.0</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/xws-security-3.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.2.7</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.2.7-b41</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
-	        <groupId>com.sun.xml.bind</groupId>
-	        <artifactId>jaxb-impl</artifactId>
-	        <version>2.1.13</version>
-	        <type>jar</type>
-			<scope>compile</scope>
-      	</dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.1.3</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>policy</artifactId>
+			<version>2.3</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.xml.fastinfoset</groupId>
+			<artifactId>FastInfoset</artifactId>
+			<version>1.2.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>${jettyVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jettyVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
+		<!-- dependency> <groupId>org.jboss.ws.native</groupId> <artifactId>jbossws-native-core</artifactId> 
+			<version>3.4.1.GA</version> <type>jar</type> <scope>compile</scope> </dependency -->
 
 
 	</dependencies>

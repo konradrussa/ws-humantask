@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.store.infrastructure.JavaObjectProcessing;
 import wsht.runtime.expressions.sbql.store.object.ComplexObject;
 import wsht.runtime.expressions.sbql.store.object.SBAObject;
@@ -27,7 +28,12 @@ public class SBAStore {
 	
 	
 	public void loadContainer(Object obj) {
-		new JavaObjectProcessing().loadContainer(this,obj);
+		ENVS.getInstance().setStore(this);
+		if(obj != null) {
+			new JavaObjectProcessing().loadContainer(this,obj);
+			List<Long> rootOIDs = ((ComplexObject)this.objectMap.get(0L)).childOIDs;
+			ENVS.getInstance().init(true, rootOIDs.toArray(new Long[0]));
+		}
 	}
 	
 	public void printDataStore() {

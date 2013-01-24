@@ -10,7 +10,7 @@ import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
-import wsht.runtime.expressions.sbql.store.Container;
+import wsht.runtime.expressions.sbql.store.TaskInstance;
 
 /*
  * Returns the excluded owners. It MUST evaluate to an empty htt:organizationalEntity in case of an error.
@@ -32,11 +32,11 @@ public class GetExcludedOwnersFunction extends WSHTOperator implements IOperator
 		
 		AbstractQueryResult res = QRES.getInstance().pop(true);
 		if(res == null) {
-			BagResult resOut = ENVS.getInstance().bind(Container._F_excludedOwnersField);
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_excludedOwnersField);
 			QRES.getInstance().push(resOut);
 		} else if(res instanceof StringResult) {
 			//BagResult resOut = ENVS.getInstance().bind(((StringResult) res).getValue());
-			BagResult resOut = ENVS.getInstance().bind(Container._F_excludedOwnersField);
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_excludedOwnersField);
 			QRES.getInstance().push(resOut);
 		} else {
 			throw new SBQLEvalException("GetExcludedOwnersFunction.eval - nieobslugiwana ilosc agrumentow");

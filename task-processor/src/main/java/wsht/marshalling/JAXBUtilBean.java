@@ -12,7 +12,7 @@ import wsht.marshalling.exception.MarshalException;
 import wsht.marshalling.exception.ParseXmlException;
 import wsht.marshalling.exception.RejectedMessageException;
 import wsht.marshalling.exception.UnmarshalException;
-import wsht.marshalling.exception.WSHTException;
+import wsht.marshalling.exception.WSHTMarshallingException;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -46,9 +46,9 @@ public class JAXBUtilBean implements IJAXBUtilBean {
     private final String SCHEMA_PATH_WSHT_TYPES = "oasis/ws-humantask-types.xsd";
     private final String SCHEMA_PATH_WSHT_CONTEXT = "oasis/ws-humantask-context.xsd";
     private final String SCHEMA_PATH_WSHT_POLICY = "oasis/ws-humantask-policy.xsd";
-    private final String SCHEMA_PATH_XML = "oasis/xml.xsd";
     private final String SCHEMA_PATH_WS_ADDR = "oasis/ws-addr.xsd";
-    private final String SCHEMA_PATH_WS_WSCOOR = "wstx-wscoor-1.1-schema-200701.xsd";
+    private final String SCHEMA_PATH_WS_WSCOOR = "oasis/wstx-wscoor-1.1-schema-200701.xsd";
+    private final String SCHEMA_PATH_XML = "oasis/xml.xsd";
 
     public JAXBUtilBean() {
     	String schemaFactoryProperty = "javax.xml.validation.SchemaFactory:" + XMLConstants.W3C_XML_SCHEMA_NS_URI;
@@ -58,7 +58,11 @@ public class JAXBUtilBean implements IJAXBUtilBean {
         List<Source> schemas = new ArrayList<Source>();
         schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_XML)));
         schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WSHT)));
-
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WSHT_TYPES)));
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WSHT_CONTEXT)));
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WSHT_POLICY)));
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WS_WSCOOR)));
+        schemas.add(new StreamSource(JAXBUtilBean.class.getClassLoader().getResourceAsStream(SCHEMA_PATH_WS_ADDR)));
 
         try {
             Schema schema = factory.newSchema(schemas.toArray(new Source[schemas.size()]));
@@ -90,7 +94,7 @@ public class JAXBUtilBean implements IJAXBUtilBean {
         }
     }
     
-    public String marshal(Object message) throws WSHTException {
+    public String marshal(Object message) throws WSHTMarshallingException {
         try {
             StringWriter sw = new StringWriter();
             JAXBContext context = JAXBContext.newInstance(message.getClass());
@@ -100,38 +104,38 @@ public class JAXBUtilBean implements IJAXBUtilBean {
             marshaller.marshal(message, sw);
             return sw.toString();
         } catch (PropertyException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         } catch (JAXBException e) {
             throw new MarshalException(e, message);
         }
     }
     
-    public THumanInteractions parseAndUnmarshal(String str) throws WSHTException, RejectedMessageException {
+    public THumanInteractions parseAndUnmarshal(String str) throws WSHTMarshallingException, RejectedMessageException {
         try {
             Document document = parseString(str);
             boolean valid = isValid(document);
-            if(!valid) throw new WSHTException("błąd walidacji");
+            if(!valid) throw new WSHTMarshallingException("MARSHALLING: Validation error");
             THumanInteractions msg = unmarshal(document);
             return msg;
         } catch (ParseXmlException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         } catch (UnmarshalException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         }
     }
 
-    private Document parseString(String str) throws WSHTException {
+    private Document parseString(String str) throws WSHTMarshallingException {
         try {
             DocumentBuilder domBuilder = getDomBuilder();
             InputSource is = new InputSource(new StringReader(str));
             Document document = domBuilder.parse(is);
             return document;
         } catch (ParserConfigurationException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         } catch (SAXException e) {
             throw new ParseXmlException(str,e);
         } catch (IOException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         }
     }
 
@@ -148,13 +152,13 @@ public class JAXBUtilBean implements IJAXBUtilBean {
     }
 
 
-    private boolean isValid(Document document) throws WSHTException {
+    private boolean isValid(Document document) throws WSHTMarshallingException {
         try {
             validator.validate(new DOMSource(document));
         } catch (SAXException e) {
             return false;
         } catch (IOException e) {
-            throw new WSHTException(e);
+            throw new WSHTMarshallingException(e);
         }
         return true;
 

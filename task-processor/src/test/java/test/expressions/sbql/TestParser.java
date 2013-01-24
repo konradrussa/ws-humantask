@@ -11,7 +11,7 @@ import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.QRES;
 import wsht.runtime.expressions.sbql.qres.grammar.SBQLLexer;
 import wsht.runtime.expressions.sbql.qres.grammar.SBQLParser;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 public class TestParser {
 
@@ -26,7 +26,7 @@ public class TestParser {
 		
 		try {
 			parser.evaluator();
-			System.out.println(Util.deref(QRES.getInstance().pop(false)));
+			System.out.println(SBQLUtil.deref(QRES.getInstance().pop(false)));
 			System.out.println("QRES " + QRES.getInstance().getStackSize());
 			System.out.println("ENVS " + ENVS.getInstance().getStackSize());
 			System.out.println();

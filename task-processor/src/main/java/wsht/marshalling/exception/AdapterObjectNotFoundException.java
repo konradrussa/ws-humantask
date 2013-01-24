@@ -2,7 +2,7 @@ package wsht.marshalling.exception;
 
 import java.io.Serializable;
 
-public class AdapterObjectNotFoundException extends WSHTException {
+public class AdapterObjectNotFoundException extends WSHTMarshallingException {
 	private static final long serialVersionUID = -5867119953148842741L;
 	
 	private Class adapterBoundType;

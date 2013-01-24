@@ -22,16 +22,16 @@ public class CreateLeanTask extends AbstractTask {
 		log.debug("Wywolanie zadania: Utworzenie zadania typu lean task");
 
 		ApplicationContext context = taskContext.getApplicationContext();
-		LeanTask task = (LeanTask) taskContext.getParameters().get(TaskParameterTypeEnum.CREATE_LEAN_TASK);
-		TaskInfo taskInfo = new TaskInfo();
-		taskInfo.setIsLeanTask(true);
-		taskInfo.setCreated(new Date());
-		taskInfo.setState(TaskStatesEnum.CREATED);
-		taskInfo.setTask(task);
-		taskInfo.setTaskIdentifier(UUID.randomUUID().toString().substring(0, 10));
+		//LeanTask task = (LeanTask) taskContext.getParameters().get(TaskParameterTypeEnum.CREATE_LEAN_TASK);
+		//TaskInfo taskInfo = new TaskInfo();
+		//taskInfo.setIsLeanTask(true);
+		//taskInfo.setCreated(new Date());
+		//taskInfo.setState(TaskStatesEnum.CREATED);
+		//taskInfo.setTask(task);
+		//taskInfo.setTaskIdentifier(UUID.randomUUID().toString().substring(0, 10));
 		
 		IRepositoryService service = (IRepositoryService)context.getBean("repositoryService");
-		service.createTaskInfo(taskInfo);
+		//service.createTaskInfo(taskInfo);
 
 	}
 

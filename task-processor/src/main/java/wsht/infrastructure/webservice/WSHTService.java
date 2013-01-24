@@ -2,16 +2,17 @@ package wsht.infrastructure.webservice;
 
 import wsht.infrastructure.web.CurrentUsersMap;
 import wsht.infrastructure.web.SessionInfo;
+import wsht.infrastructure.web.TaskSessionInfo;
 
 public abstract class WSHTService {
 
-	protected SessionInfo sessionInfo;
-	protected CurrentUsersMap usersMap;
+	private TaskSessionInfo sessionInfo;
+	private CurrentUsersMap usersMap;
 	
-	public SessionInfo getSessionInfo() {
+	public TaskSessionInfo getSessionInfo() {
 		return sessionInfo;
 	}
-	public void setSessionInfo(SessionInfo sessionInfo) {
+	public void setSessionInfo(TaskSessionInfo sessionInfo) {
 		this.sessionInfo = sessionInfo;
 	}
 	public CurrentUsersMap getUsersMap() {

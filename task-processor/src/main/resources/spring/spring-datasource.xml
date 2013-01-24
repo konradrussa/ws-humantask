@@ -30,6 +30,7 @@
 		</property>
 
 	</bean>
+	
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -59,7 +60,7 @@
 			Zero means idle connections never expire. -->
 		<property name="idleConnectionTestPeriod" value="200" />
 		<property name="acquireIncrement" value="1" />
-		<property name="maxStatements" value="3" />  <!-- 0 means: statement caching is turned off. -->
+		<property name="maxStatements" value="0" />  <!-- 0 means: statement caching is turned off. -->
 		<property name="numHelperThreads" value="3" />  <!-- 3 is default -->
 
 	</bean>

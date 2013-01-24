@@ -10,7 +10,7 @@ import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.IntegerResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 /*
 Returns the average value of all number nodes - returns NaN for an empty node-set
@@ -31,7 +31,7 @@ public class AvgOperator extends UnaryExpression implements IOperator {
 			int numbers = 0;
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof IntegerResult) {
 					double value = ((IntegerResult)r).getValue().doubleValue();
 					if(eres.getValue() == null) eres.setValue(value);
@@ -49,7 +49,7 @@ public class AvgOperator extends UnaryExpression implements IOperator {
 			int numbers = 0;
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof IntegerResult) {
 					double value = ((IntegerResult)r).getValue().doubleValue();
 					if(eres.getValue() == null) eres.setValue(value);

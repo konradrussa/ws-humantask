@@ -2,6 +2,8 @@ package wsht.runtime.aspects;
 
 import java.lang.reflect.Method;
 
+import javax.annotation.Resource;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask.api._200803.IllegalState;
@@ -11,14 +13,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import wsht.infrastructure.domain.entity.UserSession;
+import wsht.infrastructure.service.IRepositoryService;
+import wsht.infrastructure.web.TaskSessionInfo;
+import wsht.infrastructure.webservice.WSHTService;
 import wsht.runtime.enums.OperationsEnum;
 import wsht.runtime.scheduler.tasks.CreateLeanTask;
 
-public class PermissionAspect {
+public class PermissionAspect extends WSHTService {
 	
 	private static final Logger log = LoggerFactory.getLogger(PermissionAspect.class);
-
-	private UserSession userSession;
+	
+	@Resource
+	private IRepositoryService repositoryService;
 	
 	public Object checkPermissionForUser(ProceedingJoinPoint pjp) throws Throwable {
 		
@@ -26,7 +32,7 @@ public class PermissionAspect {
 		Method method = signature.getMethod();
         String methodName = method.getName();
         
-        boolean permission = userSession.checkPermission(OperationsEnum.getOperationForName(methodName));
+        boolean permission = true;//getSessionInfo().getUserSession().checkPermission(OperationsEnum.getOperationForName(methodName));
         
         if(permission) {
         	Object o = pjp.proceed();
@@ -42,8 +48,7 @@ public class PermissionAspect {
 		MethodSignature signature = (MethodSignature) pjp.getSignature();
 		Method method = signature.getMethod();
         String methodName = method.getName();
-        
-        boolean permission = userSession.getTaskInfo().checkPermission(OperationsEnum.getOperationForName(methodName));
+        boolean permission = getSessionInfo().getUserSession().getTaskInfo().checkPermission(OperationsEnum.getOperationForName(methodName));
         
         if(permission) {
         	Object o = pjp.proceed();
@@ -57,11 +62,5 @@ public class PermissionAspect {
         }
 	}
 
-	public UserSession getUserSession() {
-		return userSession;
-	}
-
-	public void setUserSession(UserSession userSession) {
-		this.userSession = userSession;
-	}
+	
 }

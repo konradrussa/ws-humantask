@@ -2,7 +2,7 @@ package wsht.marshalling.exception;
 
 import org.w3c.dom.Document;
 
-public class UnmarshalException extends WSHTException {
+public class UnmarshalException extends WSHTMarshallingException {
     
 	private Document xml;
 

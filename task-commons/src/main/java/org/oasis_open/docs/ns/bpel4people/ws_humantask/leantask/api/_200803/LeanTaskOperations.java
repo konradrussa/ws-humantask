@@ -10,6 +10,7 @@ import javax.xml.ws.Holder;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 import org.oasis_open.docs.ns.bpel4people.ws_humantask._200803.TLeanTask;
+import org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTask.InputMessage;
 
 
 /**
@@ -90,7 +91,7 @@ public interface LeanTaskOperations {
     @ResponseWrapper(localName = "createLeanTaskResponse", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803", className = "org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskResponse")
     public org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTaskResponse.OutputMessage createLeanTask(
         @WebParam(name = "inputMessage", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803")
-        org.oasis_open.docs.ns.bpel4people.ws_humantask.leantask.api._200803.CreateLeanTask.InputMessage inputMessage,
+        InputMessage inputMessage,
         @WebParam(name = "taskDefinition", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803")
         TLeanTask taskDefinition,
         @WebParam(name = "taskName", targetNamespace = "http://docs.oasis-open.org/ns/bpel4people/ws-humantask/leantask/api/200803")

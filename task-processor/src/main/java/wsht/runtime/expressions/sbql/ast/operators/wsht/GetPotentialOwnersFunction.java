@@ -10,7 +10,7 @@ import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
-import wsht.runtime.expressions.sbql.store.Container;
+import wsht.runtime.expressions.sbql.store.TaskInstance;
 
 /*
  * Returns the potential owners of the task. It MUST evaluate 
@@ -30,12 +30,12 @@ public class GetPotentialOwnersFunction extends WSHTOperator implements IOperato
 	public void eval() {
 		
 		AbstractQueryResult res = QRES.getInstance().pop(true);
-		if(res == null) {
-			BagResult resOut = ENVS.getInstance().bind(Container._F_potentialOwnersField);
+		if(res == null) {//nazwa zadania
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_potentialOwnersField);
 			QRES.getInstance().push(resOut);
 		} else if(res instanceof StringResult) {
 			//BagResult resOut = ENVS.getInstance().bind(((StringResult) res).getValue());
-			BagResult resOut = ENVS.getInstance().bind(Container._F_potentialOwnersField);
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_potentialOwnersField);
 			QRES.getInstance().push(resOut);
 		} else {
 			throw new SBQLEvalException("GetPotentialOwnersFunction.eval - nieobslugiwana ilosc agrumentow");

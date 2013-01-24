@@ -76,16 +76,11 @@ case class TaskEngine(var engineName:String) {
   def this() = this("default")
 }
 
-object TaskEngine extends FaultHandler with Bootable {
+object TaskEngine extends FaultHandler {
 
   var supervisorActor: ActorRef = system.actorOf(Props[FaultTolerantSupervisor], ActorUtils.a_1_faultTolerantSupervisor)
 
-  def startup = {
-  }
 
-  def shutdown = {
-    system.shutdown()
-  }
 
   def process(t: TaskInfo) {
     if (t.getState().isNotificationReady()) {

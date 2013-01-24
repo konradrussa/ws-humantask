@@ -19,9 +19,8 @@ import org.oasis_open.docs.ns.bpel4people.ws_humantask.context._200803.THumanTas
 import org.springframework.stereotype.Component;
 
 import wsht.marshalling.JAXBUtilBean;
-import wsht.marshalling.exception.WSHTException;
+import wsht.marshalling.exception.WSHTMarshallingException;
 
-@Component
 public class ContextHandler implements SOAPHandler<SOAPMessageContext> {
 
 	
@@ -47,7 +46,7 @@ public class ContextHandler implements SOAPHandler<SOAPMessageContext> {
                 header.addChildElement(el);
 			} catch (SOAPException e) {
 				e.printStackTrace();
-			} catch (WSHTException e) {
+			} catch (WSHTMarshallingException e) {
 				e.printStackTrace();
 			}
 		} else {

@@ -51,7 +51,6 @@ public class StructResult extends AbstractQueryResult {
 		}
 	}
 
-	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("struct(");

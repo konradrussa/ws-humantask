@@ -32,9 +32,10 @@ public class DB4oConnector implements IDB4oInterface, InitializingBean {
 		}
 	}
 	
-	public ObjectSet<?> qbe(Class clazz) throws WSHTSystemStoreException {
+	public Object qbe(Object obj) throws WSHTSystemStoreException {
 		try {
-			return db.queryByExample(clazz);
+			ObjectSet<?> ret =  db.queryByExample(obj);
+			return ret;
 		} catch(Throwable e) {
 			throw new WSHTSystemStoreException(e);
 		}
@@ -50,8 +51,8 @@ public class DB4oConnector implements IDB4oInterface, InitializingBean {
 
 	public void afterPropertiesSet() throws Exception {
 		File dbFile = new File(filename);
-		if(dbFile.exists())
-			dbFile.delete();
+		if(!dbFile.exists())
+			dbFile.createNewFile();
 		db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), filename);
 	}
 }

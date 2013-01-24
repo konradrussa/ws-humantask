@@ -12,9 +12,10 @@
 	default-lazy-init="false" default-autowire="byName">
 
 	<import resource="spring-cxf-interceptor.xml"/>
+
 	
 	<bean class="wsht.infrastructure.web.SessionInfo" id="sessionInfo" scope="session">
-		<aop:scoped-proxy/>
+		<aop:scoped-proxy />
 	</bean>
 	
 	<bean id="taskServiceWebServicesClient" class="wsht.infrastructure.web.service.endpoint.TaskOperationsClientEndpoint">
@@ -22,7 +23,9 @@
 	</bean>
 		
 	<bean id="taskService" class="wsht.infrastructure.web.service.TaskOperationsSessionService" scope="session">
-		<property name="endpoint" value="${endpoint.common.part}/${endpoint.taskoperations}" />
+		<property name="endpoint" value="${endpoint.common.part}${endpoint.taskoperations}" />
+		<property name="bus" ref="cxf" />
+		<property name="externalContextObjects" ref="externalContextObjects" />
 		<aop:scoped-proxy/>
 	</bean>
 	
@@ -32,7 +35,8 @@
 	</bean>
 		
 	<bean id="authService" class="wsht.infrastructure.web.service.AuthenticationSessionService" scope="session">
-		<property name="endpoint" value="${endpoint.common.part}/${endpoint.authentication}" />
+		<property name="endpoint" value="${endpoint.common.part}${endpoint.authentication}" />
+		<property name="bus" ref="cxf" />
 		<aop:scoped-proxy/>
 	</bean>
 

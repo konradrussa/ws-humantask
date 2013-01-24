@@ -6,7 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import wsht.infrastructure.domain.entity.Fault;
-import wsht.marshalling.exception.WSHTException;
+import wsht.exception.WSHTException;
 
 @Repository("faultRepository")
 public class FaultRepositoryJpa extends DomainRepositoryJpa<Fault> implements IFaultRepository {

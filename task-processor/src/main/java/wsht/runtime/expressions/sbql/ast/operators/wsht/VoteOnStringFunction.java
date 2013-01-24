@@ -15,7 +15,7 @@ import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 /*
 Returns the most frequently occurring string value if its occurrence is above 
@@ -59,7 +59,7 @@ public class VoteOnStringFunction extends UnaryExpression implements IOperator {
 		if(res instanceof BagResult) {
 			BagResult bagRes = (BagResult) res;
 			for(AbstractQueryResult r : bagRes.getElements()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
 					
 				} else {
@@ -69,7 +69,7 @@ public class VoteOnStringFunction extends UnaryExpression implements IOperator {
 		} else if(res instanceof StructResult) {
 			StructResult structRes = (StructResult) res;
 			for(AbstractQueryResult r : structRes.getAtoms()) {
-				r = Util.deref(r);
+				r = SBQLUtil.deref(r);
 				if(r instanceof StringResult) {
 					
 				} else {

@@ -1,18 +1,16 @@
 package wsht.runtime.expressions.sbql.ast.operators.wsht;
 
-import java.util.Map;
-
-import wsht.infrastructure.service.IRepositoryService;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
-import wsht.runtime.expressions.sbql.ast.expressions.UnaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
 import wsht.runtime.expressions.sbql.ast.operators.IOperator;
 import wsht.runtime.expressions.sbql.ast.operators.wsht.ext.WSHTOperator;
+import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.QRES;
 import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
-import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.utils.ApplicationContextProvider;
+import wsht.runtime.expressions.sbql.qres.result.BagResult;
+import wsht.runtime.expressions.sbql.qres.result.StringResult;
+import wsht.runtime.expressions.sbql.store.TaskInstance;
 
 /*
  * Returns the value of a logical people group. In case of an error 
@@ -36,12 +34,16 @@ public class GetLogicalPeopleGroupFunction extends WSHTOperator implements IOper
 	public void eval() {
 		
 		
-		//TODO: implement GetLogicalPeopleGroupFunction eval
-		AbstractQueryResult res = QRES.getInstance().pop(false);
-		if(res instanceof StructResult) {
-			StructResult term = (StructResult) res;
-			if(term.getElements().size() != 1 || term.getElements().size() != 2) 
-				throw new SBQLEvalException("GetLogicalPeopleGroupFunction.eval - element nie jest wartoscia struct 1 lub 2 elementowa");
+		AbstractQueryResult res = QRES.getInstance().pop(true);
+		if(res == null) {
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_logicalPeopleGroupsField);
+			QRES.getInstance().push(resOut);
+		} else if(res instanceof StringResult) {
+			//BagResult resOut = ENVS.getInstance().bind(((StringResult) res).getValue());
+			BagResult resOut = ENVS.getInstance().bind(TaskInstance._F_logicalPeopleGroupsField);
+			QRES.getInstance().push(resOut);
+		} else {
+			throw new SBQLEvalException("GetLogicalPeopleGroupFunction.eval - nieobslugiwana ilosc agrumentow");
 		}
 	}
 

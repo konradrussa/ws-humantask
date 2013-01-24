@@ -11,8 +11,11 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-lazy-init="true" default-autowire="byName">
 
+	<import resource="spring-web.xml"/>
 	
-	<bean id="permissionAspect" class="wsht.runtime.aspects.PermissionAspect" />
+	<bean id="permissionAspect" class="wsht.runtime.aspects.PermissionAspect">
+		<property name="sessionInfo" ref="sessionInfo"></property>
+	</bean>
 
 	<aop:config>
 		<aop:aspect id="userAspect" ref="permissionAspect" order="1">
@@ -20,10 +23,10 @@
 			<aop:around pointcut-ref="permissionPointcutUser" method="checkPermissionForUser" />
 		</aop:aspect>
 		
-		<aop:aspect id="taskAspect"  ref="permissionAspect" order="2">
+		<!-- aop:aspect id="taskAspect"  ref="permissionAspect" order="2">
 			<aop:pointcut id="permissionPointcutTask" expression="execution(* org.oasis_open.docs.ns.bpel4people.ws_humantask.api._200803.TaskOperations.*(..))" />
 			<aop:around pointcut-ref="permissionPointcutTask" method="checkPermissionForTask" />
-		</aop:aspect>
+		</aop:aspect-->
 	</aop:config>
 
 </beans>

@@ -1,7 +1,16 @@
 package wsht.runtime.expressions.sbql.ast.operators.wsht.utils;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 import java.util.TreeMap;
+
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+
+import wsht.runtime.exceptions.WSHTExpressionException;
+import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
+
 
 public class OperatorUtils {
 
@@ -104,6 +113,40 @@ public class OperatorUtils {
 		
 		return string;
 	}
+	
+	
+	public static long calculateDuration(String strDuration) throws SBQLEvalException {
+		try {
+			Period period = Period.parse(strDuration);
+			long millis = period.toStandardSeconds().getSeconds() * 1000;
+			return millis;
+		} catch(Throwable t) {
+			throw new SBQLEvalException(t.getMessage());
+		}
+	}
+	
+	public static Date returnDateDuration(Date created, long millis) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(created);
+		long computedTime = calendar.getTimeInMillis() + millis;
+		calendar.setTimeInMillis(computedTime);
+		return calendar.getTime();
+	}
+	
+	public static Date returnDateDeadline(String value) throws SBQLEvalException {
+		try {
+			return DateTime.parse(value).toDate();
+		} catch(Throwable t) {
+			throw new SBQLEvalException(t.getMessage());
+		}
+	}
+
+	public static boolean checkComputedDateElapsed(Date computedDate) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(computedDate);
+		return calendar.getTimeInMillis() <= System.currentTimeMillis();
+	}
+	
 	
 
 }

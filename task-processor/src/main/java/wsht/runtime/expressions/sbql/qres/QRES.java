@@ -3,6 +3,7 @@ package wsht.runtime.expressions.sbql.qres;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
 
@@ -20,6 +21,10 @@ public class QRES {
 			return instance;
 	
 		}
+	}
+	
+	public static void clean() {
+		QRES.getInstance().stack.clear();
 	}
 	
 	public AbstractQueryResult pop(boolean nullable) {

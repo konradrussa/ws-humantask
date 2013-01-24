@@ -11,6 +11,8 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-lazy-init="true" default-autowire="byName">
 
+	<import resource="spring-datasource.xml" />
+
 	<bean id="wshtScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
@@ -24,7 +26,6 @@
 
 	<bean id="cronSupervisorTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="supervisorJob" />
-		<!-- run every morning at 6 AM -->
 		<property name="cronExpression" value="0 0 6 * * ?" />
 	</bean>
 
@@ -32,9 +33,11 @@
 		<property name="jobClass" value="wsht.runtime.scheduler.jobs.SupervisorJob" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="timeout" value="5" />
+				<!--entry key="configurationConfigFactory" value-ref="configurationConfigFactory" /-->
 			</map>
 		</property>
 	</bean>
- 
+  
+
+
 </beans>

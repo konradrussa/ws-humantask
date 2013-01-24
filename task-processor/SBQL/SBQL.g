@@ -376,7 +376,7 @@ GROUPAS : 'groupas' | 'GROUPAS';
 
 LEFT_BRACKET : '(';
 RIGHT_BRACKET : ')';
-DOT: ('.' | DIV);
+DOT: '.';
 BAG : 'bag' | 'BAG';
 STRUCT : 'struct' | 'STRUCT';
 
@@ -396,31 +396,31 @@ INTERSECT_F : 'intersect' | 'INTERSECT';
 
 EXCEPT_F : 'except' | 'EXCEPT';
 
-VOTE_F: 'vote';
-
 CONCAT_F : 'concat';
 CONCAT_WITH_DELIMITER_F : 'concatWithDelimiter';
 LEAST_FREQUENT_OCCURENCE_F : 'leastFrequentOccurence';
 MOST_FREQUENT_OCCURENCE_F : 'mostFrequentOccurence';
+VOTE_F: 'vote';
 VOTE_ON_STRING_F : 'voteOnString';
 
-GET_ACTUAL_OWNER_F : 'getActualOwner';
-GET_BUSINESS_ADMINISTRATORS_F : 'getBusinessAdministrators';
 GET_COUNT_OF_FINISHED_SUBTASKS_F : 'getCountOfFinishedSubTasks';
 GET_COUNT_OF_SUBTASKS_F : 'getCountOfSubTasks';
 GET_COUNT_OF_SUBTASKS_IN_STATE_F : 'getCountOfSubTasksInState';
 GET_COUNT_OF_SUBTASKS_WITH_OUTCOME_F : 'getCountOfSubTasksWithOutcome';
-GET_EXCLUDED_OWNERS_F : 'getExcludedOwners';
-GET_INPUT_F : 'getInput';
-GET_LOGICAL_PEOPLE_GROUP_F : 'getLogicalPeopleGroup';
-GET_OUTCOME_F : 'getOutcome';
-GET_OUTPUT_F : 'getOutput';
-GET_POTENTIAL_OWNERS_F : 'getPotentialOwners';
 GET_SUBTASK_OUTPUT_F : 'getSubtaskOutput';
 GET_SUBTASK_OUTPUTS_F : 'getSubtaskOutputs';
-GET_TASK_INITIATOR_F : 'getTaskInitiator';
-GET_TASK_PRIORITY_F : 'getTaskPriority';
+GET_INPUT_F : 'getInput';
+GET_OUTCOME_F : 'getOutcome';
+GET_OUTPUT_F : 'getOutput';
+
+GET_LOGICAL_PEOPLE_GROUP_F : 'getLogicalPeopleGroup';
+GET_BUSINESS_ADMINISTRATORS_F : 'getBusinessAdministrators';
+GET_POTENTIAL_OWNERS_F : 'getPotentialOwners';
+GET_EXCLUDED_OWNERS_F : 'getExcludedOwners';
 GET_TASK_STAKEHOLDERS_F : 'getTaskStakeholders';
+GET_TASK_INITIATOR_F : 'getTaskInitiator';
+GET_ACTUAL_OWNER_F : 'getActualOwner';
+GET_TASK_PRIORITY_F : 'getTaskPriority';
 
 WAIT_FOR_F : 'waitFor';
 WAIT_UNTIL_F : 'waitUntil';

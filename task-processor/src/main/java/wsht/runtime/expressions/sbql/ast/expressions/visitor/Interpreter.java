@@ -81,7 +81,7 @@ import wsht.runtime.expressions.sbql.qres.result.LongResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 
 public class Interpreter implements ASTVisitor {
 	
@@ -126,7 +126,7 @@ public class Interpreter implements ASTVisitor {
 			List<ENVSBinder> binders = ENVS.getInstance().nested(r);
 			expression.getRightExpression().accept(this);
 			AbstractQueryResult wres = QRES.getInstance().pop(false);
-			AbstractQueryResult trueRes = Util.deref(wres);
+			AbstractQueryResult trueRes = SBQLUtil.deref(wres);
 			if(trueRes instanceof BooleanResult && ((BooleanResult)trueRes).isValue()) {
 				eres.add(r);
 			}
@@ -308,7 +308,7 @@ public class Interpreter implements ASTVisitor {
 				if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 					throw new SBQLEvalException("AllOperator.visit - rezultat nie jest pojedynczym elementem");
 				} else {
-					rightRes = Util.deref(rightRes);
+					rightRes = SBQLUtil.deref(rightRes);
 				}
 				
 				if(rightRes instanceof BooleanResult && !((BooleanResult) rightRes).isValue()) {
@@ -327,7 +327,7 @@ public class Interpreter implements ASTVisitor {
 				if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 					throw new SBQLEvalException("AllOperator.visit - rezultat nie jest pojedynczym elementem");
 				} else {
-					rightRes = Util.deref(rightRes);
+					rightRes = SBQLUtil.deref(rightRes);
 				}
 				
 				if(rightRes instanceof BooleanResult && !((BooleanResult) rightRes).isValue()) {
@@ -345,7 +345,7 @@ public class Interpreter implements ASTVisitor {
 			if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 				throw new SBQLEvalException("AllOperator.visit - rezultat nie jest pojedynczym elementem");
 			} else {
-				rightRes = Util.deref(rightRes);
+				rightRes = SBQLUtil.deref(rightRes);
 			}
 			
 			if(rightRes instanceof BooleanResult && !((BooleanResult) rightRes).isValue()) {
@@ -370,7 +370,7 @@ public class Interpreter implements ASTVisitor {
 				if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 					throw new SBQLEvalException("AnyOperator.visit - rezultat nie jest pojedynczym elementem");
 				} else {
-					rightRes = Util.deref(rightRes);
+					rightRes = SBQLUtil.deref(rightRes);
 				}
 				
 				if(rightRes instanceof BooleanResult && ((BooleanResult) rightRes).isValue()) {
@@ -389,7 +389,7 @@ public class Interpreter implements ASTVisitor {
 				if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 					throw new SBQLEvalException("AnyOperator.visit - rezultat nie jest pojedynczym elementem");
 				} else {
-					rightRes = Util.deref(rightRes);
+					rightRes = SBQLUtil.deref(rightRes);
 				}
 				
 				if(rightRes instanceof BooleanResult && ((BooleanResult) rightRes).isValue()) {
@@ -407,7 +407,7 @@ public class Interpreter implements ASTVisitor {
 			if(rightRes instanceof BagResult && ((BagResult) rightRes).getElements().size() > 1) {
 				throw new SBQLEvalException("AnyOperator.visit - rezultat nie jest pojedynczym elementem");
 			} else {
-				rightRes = Util.deref(rightRes);
+				rightRes = SBQLUtil.deref(rightRes);
 			}
 			
 			if(rightRes instanceof BooleanResult && ((BooleanResult) rightRes).isValue()) {

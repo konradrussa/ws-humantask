@@ -1,6 +1,6 @@
 package wsht.marshalling.exception;
 
-public class MarshalException extends WSHTException {
+public class MarshalException extends WSHTMarshallingException {
     private Object obj;
 
     public MarshalException(Throwable cause, Object obj) {

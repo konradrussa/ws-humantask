@@ -13,7 +13,7 @@ public class DateResult extends AbstractQueryResult {
 		this.value = value;
 	}
 
-	public Date isValue() {
+	public Date getValue() {
 		return value;
 	}
 

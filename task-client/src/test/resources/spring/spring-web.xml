@@ -24,6 +24,8 @@
 		
 	<bean id="taskService" class="wsht.infrastructure.web.service.TaskOperationsSessionService" scope="session">
 		<property name="endpoint" value="${endpoint.common.part}${endpoint.taskoperations}" />
+		<property name="bus" ref="cxf" />
+		<property name="externalContextObjects" ref="externalContextObjects" />
 		<aop:scoped-proxy/>
 	</bean>
 	

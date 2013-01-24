@@ -11,6 +11,10 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
 	default-lazy-init="false" default-autowire="byName">
 	
+	<bean id="db4oInterface" class="wsht.runtime.db4o.DB4oConnector">
+		<property name="filename" value="${db4o.file}" />
+	</bean>
+
 	<bean id="applicationContextProvider" class="wsht.runtime.utils.ApplicationContextProvider" />
 
 	<bean id="beanMapper" class="wsht.marshalling.BeanMapper">

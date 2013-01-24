@@ -1,15 +1,16 @@
 package wsht.runtime.expressions.sbql.ast.operators.wsht;
 
-import wsht.infrastructure.service.IRepositoryService;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
-import wsht.runtime.expressions.sbql.ast.expressions.UnaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
 import wsht.runtime.expressions.sbql.ast.operators.IOperator;
 import wsht.runtime.expressions.sbql.ast.operators.wsht.ext.WSHTOperator;
+import wsht.runtime.expressions.sbql.envs.ENVS;
 import wsht.runtime.expressions.sbql.qres.QRES;
+import wsht.runtime.expressions.sbql.qres.exception.SBQLEvalException;
 import wsht.runtime.expressions.sbql.qres.result.AbstractQueryResult;
+import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.StringResult;
-import wsht.runtime.utils.ApplicationContextProvider;
+import wsht.runtime.expressions.sbql.qres.result.StructResult;
 
 /*
  * Returns the outcome of the task. It MUST evaluate to an empty string 
@@ -30,11 +31,18 @@ public class GetOutcomeFunction extends WSHTOperator implements IOperator {
 	
 	public void eval() {
 		
-		//TODO: implement GetOutcomeFunction eval
 		AbstractQueryResult res = QRES.getInstance().pop(false);
+		
 		if(res instanceof StringResult) {
-			StringResult term = (StringResult) res;
-			String taskName = term.getValue();
+			BagResult resOut = ENVS.getInstance().bind(((StringResult) res).getValue());
+			QRES.getInstance().push(resOut);
+		} else if(res instanceof StructResult) {
+			StructResult term = (StructResult) res;
+			if(term.getElements().size() != 2) 
+				throw new SBQLEvalException("GetOutcomeFunction.eval - element nie jest wartoscia struct 2 elementowa");
+			
+			BagResult resOut = ENVS.getInstance().bind(((StringResult) term.getElements().get(0)).getValue());
+			QRES.getInstance().push(resOut);
 		}
 		
 	}

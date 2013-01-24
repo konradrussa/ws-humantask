@@ -4,8 +4,8 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.junit.Test;
 
-import test.utils.ResourceUtil;
 import wsht.runtime.expressions.xpath.evaluator.FunctionEvaluator;
+import wsht.runtime.utils.ResourceUtil;
 
 public class XPathFunctionsTests {
 	

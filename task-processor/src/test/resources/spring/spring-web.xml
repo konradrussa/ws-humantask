@@ -9,15 +9,26 @@
                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
-	default-lazy-init="false" default-autowire="byName">
+	default-lazy-init="false">
 
-
+	<import resource="spring-cxf-interceptor.xml"/>
 	
 	<bean class="wsht.infrastructure.web.TaskSessionInfo" id="sessionInfo" scope="session">
-		<aop:scoped-proxy/>
+		<aop:scoped-proxy />
 	</bean>
 	
 	<bean class="wsht.infrastructure.web.CurrentUsersMap" id="currentUsersMap">
+	</bean>
+	
+	<bean id="leanTaskCallbackSessionService" class="wsht.infrastructure.web.service.LeanTaskCallbackOperationsSessionService">
+		<property name="externalContextObjects" ref="externalContextObjects" />
+		<property name="bus" ref="cxf" />
+		<aop:scoped-proxy/>
+	</bean>
+	
+	
+	<bean id="leanTaskWebServicesClient" class="wsht.infrastructure.web.service.endpoint.LeanTaskCallbackOperationsClientEndpoint">
+		<property name="service" ref="leanTaskCallbackSessionService" />
 	</bean>
 
 

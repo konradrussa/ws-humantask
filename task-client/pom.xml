@@ -1,11 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
+  <!-- parent>
     <artifactId>ws-humantask</artifactId>
     <groupId>wsht</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath></relativePath>
-  </parent>
+  </parent-->
+  
+  <groupId>wsht</groupId>
+  <version>0.0.1-SNAPSHOT</version>
+  
   <artifactId>task-client</artifactId>
   <packaging>war</packaging>
   
@@ -117,7 +121,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+			<!-- plugin>
 				<groupId>org.jboss.ws.plugins</groupId>
 				<artifactId>maven-jaxws-tools-plugin</artifactId>
 				<version>1.0.1.GA</version>
@@ -137,7 +141,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin-->
 
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>

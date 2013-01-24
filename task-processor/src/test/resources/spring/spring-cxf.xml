@@ -11,15 +11,13 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
                            http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-                           http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
-	default-lazy-init="true">
+                           http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-*.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-jaxws.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	
-	<import resource="spring-web.xml" />
 
 	<bean id="serviceFactory" class="org.apache.cxf.jaxws.support.JaxWsServiceFactoryBean"
 		scope="prototype">
@@ -37,8 +35,15 @@
 		class="wsht.infrastructure.webservice.commons.AuthenticatorWebServiceImpl">
 		<property name="sessionInfo" ref="sessionInfo"></property>
 		<property name="usersMap" ref="currentUsersMap" />
+		<aop:scoped-proxy />
 	</bean>
 
+	<bean id="commonInterface-Coordinator"
+		class="wsht.infrastructure.webservice.coordinator.CoordinationServiceWebServiceImpl">
+		<property name="sessionInfo" ref="sessionInfo"></property>
+		<property name="usersMap" ref="currentUsersMap" />
+		<aop:scoped-proxy />
+	</bean>
 
 	<bean id="progmamingInterface-TaskOperations"
 		class="wsht.infrastructure.webservice.programminginterface.TaskOperationsImpl">
@@ -51,32 +56,55 @@
 	<bean id="leanTask-LeanTaskOperations"
 		class="wsht.infrastructure.webservice.leantask.LeanTaskOperationsImpl">
 	</bean>
-	
-	
+
+
 	<jaxws:endpoint implementor="#commonInterface-Authentication"
 		address="${endpoint.common.part}${endpoint.authentication}">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
-	
-		<jaxws:endpoint implementor="#progmamingInterface-TaskOperations"
-		address="${endpoint.common.part}${endpoint.taskoperations}">
-		<jaxws:serviceFactory>
-			<ref bean="serviceFactory" />
-		</jaxws:serviceFactory>
-	</jaxws:endpoint>
-	
-	
-	<jaxws:endpoint implementor="#leanTask-LeanTaskOperations"
-		address="${endpoint.common.part}${endpoint.leantaskoperations}">
+
+	<jaxws:endpoint implementor="#commonInterface-Coordinator"
+		address="${endpoint.common.part}${endpoint.coordinator}">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
 
+
+
+	<jaxws:endpoint implementor="#progmamingInterface-TaskOperations"
+		address="${endpoint.common.part}${endpoint.taskoperations}" bus="cxf">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+		<!-- jaxws:handlers> <bean class="wsht.infrastructure.webservice.handlers.CoordinatorMessageHandler" 
+			/> </jaxws:handlers -->
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+			<entry key="jaxb.additionalContextClasses">
+				<ref bean="externalContextObjects" />
+			</entry>
+		</jaxws:properties>
+	</jaxws:endpoint>
+
+
+	<jaxws:endpoint implementor="#leanTask-LeanTaskOperations"
+		address="${endpoint.common.part}${endpoint.leantaskoperations}" bus="cxf">
+		<jaxws:serviceFactory>
+			<ref bean="serviceFactory" />
+		</jaxws:serviceFactory>
+		<jaxws:properties>
+			<entry key="mtom-enabled" value="true" />
+			<entry key="jaxb.additionalContextClasses">
+				<ref bean="externalContextObjects" />
+			</entry>
+		</jaxws:properties>
+	</jaxws:endpoint>
+
 	<jaxws:endpoint implementor="#ïnteroperableProtocol-HumanTaskParticipantPortType"
-		address="${endpoint.common.part}${endpoint.humantaskparticipant}">
+		address="${endpoint.common.part}${endpoint.humantaskparticipant}" bus="cxf">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>

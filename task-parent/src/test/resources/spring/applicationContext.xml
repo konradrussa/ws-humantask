@@ -18,17 +18,16 @@
 	<context:property-placeholder location="classpath:config/config.properties" />
 	<context:component-scan base-package="wsht.infrastructures" />
 
-	<import resource="classpath:spring/spring-web.xml" />
 	<import resource="classpath:spring/spring-cxf.xml" />
-	
-	<!-- tests only the easiest way to have a simple thread-bound session scope is just to declare it in the TEST IoC configuration, like below. Just keep in mind that junit fires all tests in a single thread by default, so the state is persisted between tests. You may need to clean it up in @After. -->
+	<import resource="classpath:spring/spring-web.xml" />
+
 	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-    <property name="scopes">
-        <map>
-            <entry key="session">
-                <bean class="org.springframework.context.support.SimpleThreadScope"/>
-            </entry>
-        </map>
-    </property>
+		<property name="scopes">
+			<map>
+				<entry key="session">
+					<bean class="org.springframework.context.support.SimpleThreadScope"></bean>
+				</entry>
+			</map>
+		</property>
 	</bean>
 </beans>

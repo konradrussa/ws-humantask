@@ -41,17 +41,22 @@
 	</bean>
 	
 	<jaxws:endpoint implementor="#ïnteroperableProtocol-ClientParticipantPortType"
-		address="${endpoint.common.part}${endpoint.clientparticipant}" bus="cxf">
+		address="${endpoint.parent.part}${endpoint.clientparticipant}" bus="cxf">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
 	</jaxws:endpoint>
 	
 	<jaxws:endpoint implementor="#leanTask-LeanTaskCallbackOperations"
-		address="${endpoint.common.part}${endpoint.leantaskcallbackoperations}" bus="cxf">
+		address="${endpoint.parent.part}${endpoint.leantaskcallbackoperations}" bus="cxf">
 		<jaxws:serviceFactory>
 			<ref bean="serviceFactory" />
 		</jaxws:serviceFactory>
+		<jaxws:properties>
+           <entry key="jaxb.additionalContextClasses">
+           		<ref bean="externalContextObjects"/> 
+           </entry>
+       </jaxws:properties>
 	</jaxws:endpoint>
 
 

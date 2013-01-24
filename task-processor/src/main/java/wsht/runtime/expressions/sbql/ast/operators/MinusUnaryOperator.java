@@ -7,7 +7,7 @@ import wsht.runtime.expressions.sbql.qres.result.BagResult;
 import wsht.runtime.expressions.sbql.qres.result.IntegerResult;
 import wsht.runtime.expressions.sbql.qres.result.RealResult;
 import wsht.runtime.expressions.sbql.qres.result.StructResult;
-import wsht.runtime.expressions.sbql.util.Util;
+import wsht.runtime.expressions.sbql.util.SBQLUtil;
 import wsht.runtime.expressions.sbql.ast.expressions.Expression;
 import wsht.runtime.expressions.sbql.ast.expressions.UnaryExpression;
 import wsht.runtime.expressions.sbql.ast.expressions.visitor.ASTVisitor;
@@ -23,7 +23,7 @@ public class MinusUnaryOperator extends UnaryExpression implements IOperator {
 		if(res instanceof BagResult || res instanceof StructResult) 
 			throw new SBQLEvalException("MinusUnaryOperator.eval - nie jest pojedynczym elementem");
 		
-		res = Util.deref(res);
+		res = SBQLUtil.deref(res);
 		
 		if(res instanceof IntegerResult) {
 			Integer value = ((IntegerResult)res).getValue();

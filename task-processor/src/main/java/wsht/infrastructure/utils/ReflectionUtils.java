@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
-import wsht.marshalling.exception.WSHTException;
+import wsht.exception.WSHTException;
 
 public class ReflectionUtils {
 	
@@ -44,6 +44,9 @@ public class ReflectionUtils {
 	public static Object invokeMethod(final Object o, final Method m, final Object...params) throws WSHTException {
 		String msg;
 		try {
+			System.out.println(m.getName() + " " + m.isAccessible());
+			m.setAccessible(true);
+			
 			return m.invoke(o, params);
 		} catch (IllegalArgumentException e) {
 			msg = e.getMessage();

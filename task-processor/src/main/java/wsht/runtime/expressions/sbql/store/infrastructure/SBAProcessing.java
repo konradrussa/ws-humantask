@@ -51,9 +51,8 @@ public abstract class SBAProcessing {
 	}
 	
 	protected String returnObjectName() {
-		String objName= objectFieldName == null ?  
+		return objectFieldName == null ?  
 				currentObjectClassSimpleName() : objectFieldName;
-		return objName;
 	}
 	
 

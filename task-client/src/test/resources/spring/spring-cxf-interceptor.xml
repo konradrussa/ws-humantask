@@ -36,7 +36,13 @@
 		</property>
 	</bean>
 
-
+	<bean id="externalContextObjects" class="wsht.infrastructure.utils.ClassArrayFactoryBean">
+		<property name="classNames">
+			<list>
+				<value>object.ClaimApprovalResponse</value>
+			</list>
+		</property>
+	</bean>
 	
 
 </beans>

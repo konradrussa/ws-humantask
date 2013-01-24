@@ -37,7 +37,6 @@ public class BagResult extends AbstractQueryResult {
 		}
 	}
 
-	@Override
 	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("bag(");
