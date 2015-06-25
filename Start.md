@@ -5,4 +5,4 @@ poc
 
 # Details #
 
-soon available
+available soon
